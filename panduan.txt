@@ -1,0 +1,18 @@
+1) User
+2) Manager
+3) Admin
+When we log in as admin then it will redirect on admin routes, If you log in as manager then it will redirect on manager routes.
+- php artisan migrate
+- php artisan
+- php artisan db:seed --class=CreateUsersSeeder
+- php artisan serve
+
+user dan password :
+admin@admin.com
+123456789
+
+manager@admin.com
+123456789
+
+user@admin.com
+123456789
