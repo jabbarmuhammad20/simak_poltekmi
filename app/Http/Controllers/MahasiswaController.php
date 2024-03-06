@@ -1,37 +1,58 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use Illuminate\Support\Facades\Auth;
 use App\Models\Matakuliah;
 use App\Models\Nilai;
-
 use Illuminate\Http\Request;
 
 class MahasiswaController extends Controller
 {
-    public function nilai(){
-        $matkul = Nilai::with('Matakuliah')->get();
-        return view('mhs.nilai.daftarNilai_mhs',['matkul'=>$matkul]);
+    private function response($success, $message, $statusCode = 200)
+    {
+        return response()->json([
+            'success' => $success,
+            'message' => $message
+        ], $statusCode);
     }
 
-    public function daftarMatkul(){
+    public function nilai() {
+        $matkul = Nilai::with('matakuliah','mahasiswa')->get();
+        return view('mhs.nilai.daftarNilai_mhs', compact('matkul'));
+    }
+
+    public function daftarMatkul() {
         $matkul = Matakuliah::all();
-        return view('mhs.matkul.daftarMatkul_mhs',['matkul'=>$matkul]);
+        return view('mhs.matkul.daftarMatkul_mhs', compact('matkul'));
     }
 
-    public function krs(){
-        $matkul = Matakuliah::with('Nilai')->get();
-        return view('mhs.matkul.krs_mhs',['matkul'=>$matkul]);
+    public function krs(Request $request) {
+        if ($request->ajax()) {
+            if ($request->isMethod('get')) {
+                return $this->response(true, Matakuliah::with('Nilai')->get());
+            }
+        }
+
+        return view('mhs.matkul.krs_mhs');
     }
 
-    public function inputkrs(Request $request){
-        // $this->validate($request,[
-        //     'matakuliah_id'=>'unique:matakuliah_id',
-        // ]);
-        $matkul= new Nilai;
-        $matkul-> matakuliah_id =$request->matakuliah_id;
-        $matkul-> mahasiswa_npm =$request->mahasiswa_npm;
-        $matkul->save();
-        return redirect('krs')->with(['success' => 'Berhasil Ditambahkan']);
+    public function inputkrs(Request $request) {
+        if ($request->ajax()) {
+            if ($request->isMethod('get')) {
+                $existingIds = Matakuliah::pluck('id')->toArray();
+                $takeNonExistingIds = Nilai::whereIn('matakuliah_id', $existingIds)
+                                           ->where('mahasiswa_npm', Auth::user()->npm)
+                                           ->get();
+                return $this->response(true, $takeNonExistingIds);
+            }
+
+            Nilai::create([
+                'matakuliah_id' => $request->matakuliah_id,
+                'mahasiswa_npm' => Auth::user()->npm,
+            ]);
+    
+            return $this->response(true, 'Berhasil menambah KRS.');
+        }
     }
-        
 }

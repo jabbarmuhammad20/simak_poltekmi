@@ -11,21 +11,23 @@ class Nilai extends Model
     use HasFactory;
     protected $table = 'nilai_tabel';
     protected $fillable = [
-    'matakuliah_id',
-    'k_matakuliah',
-    'nama_matakuliah',
-    'mahasiswa_npm',
-    'krs',
-    'nidn',
-    'nilai',
-    'ket',
+        'matakuliah_id',
+        'k_matakuliah',
+        'nama_matakuliah',
+        'mahasiswa_npm',
+        'krs',
+        'nidn',
+        'nilai',
+        'ket',
     ];
 
-    public function Matakuliah()
+    public function matakuliah()
     {
-     return $this->hasMany('App\Models\Matakuliah');
+        return $this->belongsTo(Matakuliah::class, 'matakuliah_id', 'id');
     }
 
-
-
+    public function mahasiswa()
+    {
+        return $this->belongsTo(Mahasiswa::class, 'mahasiswa_npm', 'npm');
+    }
 }

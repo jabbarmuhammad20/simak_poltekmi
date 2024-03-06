@@ -13,18 +13,18 @@ class Matakuliah extends Model
     use HasFactory;
     protected $table = 'matakuliah_tabel';
     protected $fillable = [
-    'k_matkul',
-    'dosen_id',
-    'prog_studi',
-    'nama_matakuliah',
-    'sks',
-    'semester',
-    'aktif',
-    'ket',
+        'k_matkul',
+        'dosen_id',
+        'prog_studi',
+        'nama_matakuliah',
+        'sks',
+        'semester',
+        'aktif',
+        'ket',
     ];
+    
     public function Nilai()
     {
-        // Setiap user akan memiliki banyak data
         return $this->hasMany('App\Models\Nilai');
     }
 

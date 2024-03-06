@@ -63,15 +63,15 @@ All Normal Users Routes List
 --------------------------------------------*/
 
 Route::middleware(['auth', 'user-access:user'])->group(function () {
-
-  
-
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
-    Route::get('nilai', [MahasiswaController::class, 'nilai'])->name('nilai');
-    Route::get('matakuliah', [MahasiswaController::class, 'daftarMatkul'])->name('matakuliah');
-    Route::get('krs', [MahasiswaController::class, 'krs'])->name('krs');
-    Route::post('inputkrs', [MahasiswaController::class, 'inputkrs'])->name('inputkrs');
-
+	Route::controller(HomeController::class)->group(function () { 
+		Route::match(['GET'], 'home', 'index')->name('home');
+	});
+	Route::controller(MahasiswaController::class)->group(function () { 
+		Route::match(['GET'], 'nilai','nilai')->name('nilai');
+		Route::match(['GET'], 'matakuliah','daftarMatkul')->name('matakuliah');
+		Route::match(['GET'], 'krs','krs')->name('krs');
+		Route::match(['GET', 'POST'], 'inputkrs','inputkrs')->name('inputkrs');
+	});
 });
 
   
