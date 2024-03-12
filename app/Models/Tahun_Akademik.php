@@ -10,7 +10,6 @@ class Tahun_Akademik extends Model
     use HasFactory;
     protected $table = 'tahun_akademik';
     protected $fillable = [
-    'tahun_akademik',
-
+        'tahun_akademik',
     ];
 }

@@ -8,10 +8,11 @@ use App\Models\Matakuliah;
 class Dosen extends Model
 {
     use HasFactory;
-    protected $table = 'dosen_tabel';
+    protected $table = 'dosen';
     protected $fillable = [
         'id',
         'nidn',
+        'user_id',
         'nama',
         'prog_studi',
     ];
