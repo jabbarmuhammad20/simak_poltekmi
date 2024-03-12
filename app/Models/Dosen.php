@@ -20,4 +20,9 @@ class Dosen extends Model
     {
      return $this->hasMany('App\Models\Matakuliah');
     }
+
+    public function User()
+    {
+     return $this->hasMany('App\Models\Matakuliah');
+    }
 }

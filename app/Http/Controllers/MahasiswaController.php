@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Matakuliah;
 use App\Models\Nilai;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class MahasiswaController extends Controller
@@ -33,8 +34,9 @@ class MahasiswaController extends Controller
                 return $this->response(true, Matakuliah::with('Nilai')->get());
             }
         }
-
-        return view('mhs.matkul.krs_mhs');
+ 
+        $matkul = Setting::find(1);        
+        return view('mhs.matkul.krs_mhs',compact('matkul'));
     }
 
     public function inputkrs(Request $request) {

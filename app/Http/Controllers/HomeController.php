@@ -86,11 +86,11 @@ class HomeController extends Controller
 
      */
 
-    public function managerHome(): View
+    public function dosenHome(): View
 
     {
 
-        return view('managerHome');
+        return view('dosenHome');
 
     }
 

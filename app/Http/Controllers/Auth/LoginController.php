@@ -118,9 +118,9 @@ class LoginController extends Controller
 
                 return redirect()->route('admin.home');
 
-            }else if (auth()->user()->type == 'manager') {
+            }else if (auth()->user()->type == 'dosen') {
 
-                return redirect()->route('manager.home');
+                return redirect()->route('dosen.home');
 
             }else{
 

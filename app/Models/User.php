@@ -17,6 +17,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use App\Models\Dosen;
 
   
 
@@ -108,10 +109,14 @@ class User extends Authenticatable
 
         return new Attribute(
 
-            get: fn ($value) =>  ["user", "admin", "manager"][$value],
+            get: fn ($value) =>  ["user", "admin", "dosen"][$value],
 
         );
 
+    }
+
+    public function Dosen(){
+    return $this->hasMany('App\Models\Dosen');
     }
 
 }

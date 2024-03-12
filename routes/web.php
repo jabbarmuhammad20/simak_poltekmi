@@ -10,6 +10,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DosenController;
 
   
 
@@ -110,10 +111,10 @@ All Admin Routes List
 
 --------------------------------------------*/
 
-Route::middleware(['auth', 'user-access:manager'])->group(function () {
+Route::middleware(['auth', 'user-access:dosen'])->group(function () {
+    Route::get('/dosen/home', [HomeController::class, 'dosenHome'])->name('dosen.home');
+    Route::get('/dosen/daftarmatkul', [DosenController::class, 'daftarMatkul'])->name('dosen.daftarmatkul');
+    Route::get('/dosen/nilai{id}', [DosenController::class, 'showMhs'])->name('dosen.nilai');
 
-  
-
-    Route::get('/manager/home', [HomeController::class, 'managerHome'])->name('manager.home');
 
 });
