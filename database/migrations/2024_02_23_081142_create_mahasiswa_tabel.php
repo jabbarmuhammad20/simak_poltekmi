@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('mahasiswa', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id');
+            $table->integer('user_id');
             $table->integer('npm')->unique();
-            $table->string('semester');
+            $table->integer('semester');
             $table->string('prog_studi');
             $table->string('k_dosenwali');
             $table->string('aktif');

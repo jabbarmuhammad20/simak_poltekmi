@@ -21,7 +21,7 @@
               <h5 class="card-title">Form {{ $data['title']}}</h5>
 
               <!-- General Form Elements -->
-              <form action="{{route ('dosen.store.matkul')}}" method="post" class="f1">
+              <form action="{{ Auth::user()->type === 'admin' ? route ('admin.store.matkul') : route('dosen.store.matkul')}}" method="post" class="f1">
                 {{csrf_field() }}
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">Tahun Akademik</label>

@@ -37,11 +37,9 @@ class AdminController extends Controller
                 'password' => Hash::make('123456789'), 
             ]);
 
-            $userId = $user->id;
-
             Mahasiswa::create([
-                'user_id' => $userId,
-                'npm' => $request->npm,
+                'user_id' => $user->id,
+                'npm' => $user->npm,
                 'semester' => $request->semester,
                 'prog_studi' => $request->prog_studi,
                 'k_dosenwali' => $request->k_dosenwali,

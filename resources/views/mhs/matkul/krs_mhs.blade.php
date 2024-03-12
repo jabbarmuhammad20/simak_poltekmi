@@ -99,7 +99,6 @@
             type: 'get',
             dataType: 'json',
             success: function(response) {
-                console.log(BASEURL)
                 if (response.success) {
                     updateTable(response.message);
                 } else {

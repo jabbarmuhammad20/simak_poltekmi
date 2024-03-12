@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('ganjil_genap');
             $table->string('tahun_akademik');
-
             $table->timestamps();
         });
     }
