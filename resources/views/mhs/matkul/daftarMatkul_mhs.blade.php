@@ -1,11 +1,11 @@
-@extends('layouts.master_mhs')
+@extends('layouts.dashboard')
 @section('content')
 <div class="pagetitle">
-    <h1>Daftar Matakuliah Aktif</h1>
+    <h1>{{ $data['title'] }}</h1>
     <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-        <li class="breadcrumb-item active">Daftar Matakuliah Aktif</li>
+        <li class="breadcrumb-item active">{{ $data['title'] }}</li>
       </ol>
     </nav>
   </div><!-- End Page Title -->
@@ -15,7 +15,7 @@
 
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Daftar Matakuliah Aktif</h5>
+            <h5 class="card-title">{{ $data['title'] }}</h5>
 
             <!-- Table with stripped rows -->
             <table class="table table-striped">
@@ -29,10 +29,10 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($matkul as $mt )
+                @foreach ($data['matkul'] as $index => $mt )
                   
                 <tr>
-                  <th scope="row">1</th>
+                  <th scope="row">{{ $index + 1}}</th>
                   <td>{{$mt->k_matkul}}</td>
                   <td>{{$mt->nama_matakuliah}}</td>
                   <td>{{$mt->sks}}</td>
@@ -41,7 +41,6 @@
                 @endforeach
               </tbody>
             </table>
-            <!-- End Table with stripped rows -->
 
           </div>
         </div>

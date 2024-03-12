@@ -5,8 +5,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Nilai;
-use App\Models\Dosen;
 
 class Matakuliah extends Model
 {
@@ -25,11 +23,11 @@ class Matakuliah extends Model
     
     public function Nilai()
     {
-        return $this->hasMany('App\Models\Nilai');
+        return $this->hasMany(Nilai::class);
     }
 
     public function Dosen()
     {
-        return $this->belongsTo('App\Models\Dosen');
+        return $this->belongsTo(Dosen::class);
     }
 }

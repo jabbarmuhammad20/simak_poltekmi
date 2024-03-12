@@ -1,5 +1,7 @@
-@extends('layouts.master_admin')
+@extends('layouts.dashboard')
+
 @section('content')
+
 <div class="pagetitle">
     <h1>Tambah Matakuliah</h1>
     <nav>
@@ -30,7 +32,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                          @foreach ($matkul as $m )
+                          @foreach ($data['matkul'] as $m )
                             
                           <tr>
                             <td>1</td>
@@ -52,4 +54,5 @@
         </div>
     </div>
 </section>
+
 @endsection

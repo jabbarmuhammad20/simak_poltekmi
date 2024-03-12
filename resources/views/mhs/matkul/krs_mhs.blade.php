@@ -1,11 +1,13 @@
-@extends('layouts.master_mhs')
+@extends('layouts.dashboard')
+
 @section('content')
+
 <div class="pagetitle">
-    <h1>Kartu Rencana Studi</h1>
+    <h1>{{ $data['title'] }}</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item active">Kartu Rencana Studi</li>
+            <li class="breadcrumb-item active">{{ $data['title'] }}</li>
         </ol>
     </nav>
 </div>
@@ -15,7 +17,7 @@
 
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Kartu Rencana Studi</h5>
+                <h5 class="card-title">{{ $data['title'] }}</h5>
 
                 <table id="matkulTable"  class="table table-striped">
                     <thead>
@@ -35,17 +37,14 @@
             </div>
         </div>
     </section>
-    @endsection
+@endsection
     
+@section('script')
     
-    @section('script')
-    
-
-    <script>
-        
-        function addMatkul(matakuliahId) {
+<script>
+    function addMatkul(matakuliahId) {
         $.ajax({
-            url: '/inputkrs',
+            url: BASEURL + 'dashboard/mahasiswa/inputkrs',
             type: 'post',
             dataType: 'json',
             data: {
@@ -68,7 +67,7 @@
     
     function checkMatkul(courseId) {
         $.ajax({
-            url: '/inputkrs',
+            url: BASEURL + 'dashboard/mahasiswa/inputkrs',
             type: 'get',
             dataType: 'json',
             success: function(response) {
@@ -96,10 +95,11 @@
     
     function fetchData() {
         $.ajax({
-            url: '/krs',
+            url: BASEURL + 'dashboard/mahasiswa/krs',
             type: 'get',
             dataType: 'json',
             success: function(response) {
+                console.log(BASEURL)
                 if (response.success) {
                     updateTable(response.message);
                 } else {
@@ -112,7 +112,6 @@
         });
     }
     
-
     function updateTable(data) {
         if (data && Array.isArray(data)) {
             var tableBody = $('#matkulTable tbody');
@@ -137,12 +136,9 @@
                 }
             }
             
-            
-            $(document).ready(function() {
-                fetchData();
-            });
-            
-            
-            </script>
+    $(document).ready(function() {
+        fetchData();
+    });        
+</script>
 
 @endsection()

@@ -19,13 +19,19 @@ class MahasiswaController extends Controller
     }
 
     public function nilai() {
-        $matkul = Nilai::with('matakuliah','mahasiswa')->get();
-        return view('mhs.nilai.daftarNilai_mhs', compact('matkul'));
+        $data = [
+            'title' => 'Data Nilai',
+            'matkul' => Nilai::with('matakuliah','mahasiswa')->get(),
+        ];
+        return view('mhs.nilai.daftarNilai_mhs', compact('data'));
     }
 
     public function daftarMatkul() {
-        $matkul = Matakuliah::all();
-        return view('mhs.matkul.daftarMatkul_mhs', compact('matkul'));
+        $data = [
+            'title' => 'Daftar Matakuliah Aktif',
+            'matkul' => Matakuliah::all(),
+        ];
+        return view('mhs.matkul.daftarMatkul_mhs', compact('data'));
     }
 
     public function krs(Request $request) {
@@ -34,9 +40,12 @@ class MahasiswaController extends Controller
                 return $this->response(true, Matakuliah::with('Nilai')->get());
             }
         }
- 
-        $matkul = Setting::find(1);        
-        return view('mhs.matkul.krs_mhs',compact('matkul'));
+     
+        $data = [
+            'title' => 'Kartu Rencana Studi',
+            'krs' => Setting::find(1),
+        ];
+        return view('mhs.matkul.krs_mhs',compact('data'));
     }
 
     public function inputkrs(Request $request) {

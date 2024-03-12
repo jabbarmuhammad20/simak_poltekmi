@@ -1,7 +1,10 @@
-@extends('layouts.master_mhs')
+@extends('layouts.dashboard')
+
 @section('content')
-<div class="pagetitle">
-    <h1>Blank Page</h1>
+
+  <div class="pagetitle">
+    <h1>{{ $data['title']}}</h1>
+    {{-- 
     <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -9,7 +12,8 @@
         <li class="breadcrumb-item active">Blank</li>
       </ol>
     </nav>
-  </div><!-- End Page Title -->
+    --}}
+  </div>
 
   <section class="section">
     <div class="row">
@@ -36,22 +40,5 @@
       </div>
     </div>
   </section>
-{{-- 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                    You are a User.
-                </div>
-            </div>
-        </div>
-    </div>
-</div> --}}
+
 @endsection

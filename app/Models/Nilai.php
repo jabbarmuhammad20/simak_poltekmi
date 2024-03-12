@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Matakuliah;
 
 class Nilai extends Model
 {
@@ -29,5 +28,10 @@ class Nilai extends Model
     public function mahasiswa()
     {
         return $this->belongsTo(Mahasiswa::class, 'mahasiswa_npm', 'npm');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'mahasiswa_npm', 'npm');
     }
 }

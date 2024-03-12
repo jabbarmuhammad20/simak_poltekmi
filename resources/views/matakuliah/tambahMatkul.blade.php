@@ -1,11 +1,13 @@
-@extends('layouts.master_admin')
+@extends('layouts.dashboard')
+
 @section('content')
+
 <div class="pagetitle">
-    <h1>Tambah Matakuliah</h1>
+    <h1>{{ $data['title']}}</h1>
     <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-        <li class="breadcrumb-item active">Tambah Matakuliah</li>
+        <li class="breadcrumb-item active">{{ $data['title']}}</li>
       </ol>
     </nav>
   </div><!-- End Page Title -->
@@ -16,17 +18,17 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Form Tambah Matakuliah</h5>
+              <h5 class="card-title">Form {{ $data['title']}}</h5>
 
               <!-- General Form Elements -->
-              <form action="{{route ('tambahmatkulstore')}}" method="post" class="f1">
+              <form action="{{route ('dosen.store.matkul')}}" method="post" class="f1">
                 {{csrf_field() }}
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">Tahun Akademik</label>
                     <div class="col-sm-10">
                         <select class="form-select" aria-label="Default select example" name="tahun_akademik">
                             <option>Silahkan Pilih Tahun Akademik</option>
-                            @foreach ($ta as $t )
+                            @foreach ($data['tahunAkademik'] as $t )
                             <option value="{{$t->tahun_akademik}}">{{$t->tahun_akademik}}</option>
                                 
                             @endforeach
@@ -79,7 +81,7 @@
                     <div class="col-sm-10">
                         <select class="form-select" aria-label="Default select example" name="dosen_id">
                             <option selected>Pilih Dosen Pengampu</option>
-                            @foreach ($dosen as $d )
+                            @foreach ($data['dosen'] as $d )
                             <option value="{{$d->id}}" >{{$d->nidn}}-{{$d->nama}}</option>
                             @endforeach
                         </select>
@@ -117,4 +119,5 @@
 
         </div>
   </section>
+  
 @endsection

@@ -1,11 +1,13 @@
-@extends('layouts.master_admin')
+@extends('layouts.dashboard')
+
 @section('content')
+
 <div class="pagetitle">
-    <h1>Tambah Mahasiswa</h1>
+    <h1>{{ $data['title'] }}</h1>
     <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-        <li class="breadcrumb-item active">Tambah Mahasiswa</li>
+        <li class="breadcrumb-item active">{{ $data['title'] }}</li>
       </ol>
     </nav>
   </div><!-- End Page Title -->
@@ -16,10 +18,10 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Form Tambah Mahasiswa</h5>
+              <h5 class="card-title">Form {{ $data['title'] }}</h5>
 
               <!-- General Form Elements -->
-              <form action="{{route ('tambahstore')}}" method="post" class="f1">
+              <form action="{{route ('admin.store.mahasiswa')}}" method="post" class="f1">
                 {{csrf_field() }}
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-2 col-form-label">Nama</label>
@@ -66,7 +68,7 @@
                     <div class="col-sm-10">
                       <select class="form-select" aria-label="Default select example" name="k_dosenwali">
                         <option selected>Open this select menu</option>
-                        @foreach ($dosen as $dsn )
+                        @foreach ($data['dosen'] as $dsn )
                         <option value="{{$dsn->nidn}}">{{$dsn->nidn}} - {{$dsn->nama}}</option>
                         @endforeach
                       </select>
@@ -104,4 +106,5 @@
 
         </div>
   </section>
+  
 @endsection

@@ -1,14 +1,16 @@
-@extends('layouts.master_dosen')
+@extends('layouts.dashboard')
+
 @section('content')
-<div class="pagetitle">
-    <h1>Daftar Matakuliah yang Diampu</h1>
+
+  <div class="pagetitle">
+    <h1>{{ $data['title'] }}</h1>
     <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-        <li class="breadcrumb-item active">Daftar Matakuliah yang Diampu</li>
+        <li class="breadcrumb-item active">{{ $data['title'] }}</li>
       </ol>
     </nav>
-  </div><!-- End Page Title -->
+  </div>
   <section class="section">
     <div class="col-lg-12">
 
@@ -16,7 +18,6 @@
             <div class="card-body">
                 <h5 class="card-title">Daftar Matakuliah</h5>
 
-                <!-- Table with stripped rows -->
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -30,27 +31,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($matkul as $m )
-                                {{-- @if($n->dosen_id == Auth::user()->id) --}}
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>{{ $m->k_matkul }}</td>
-                                        <td>{{ $m->matakuliah }}</td>
-                                        <td>{{ $m->semester }}</td>
-                                        <td>{{ $m->sks }}</td>
-                                        <td>{{ $m->prog_studi }}</td>
-                                        <td>
-                                            <a href="{{ route('dosen.nilai', $m->id)}}"><button type="button" class="btn btn-primary btn-sm"><i class="fa fa-search"></i>
-                                            </button></a>
-                                        </td>
-                            {{-- @endif --}}
-                            </tr>
+                        @foreach($data['matkul'] as $index => $m)
+                        <tr>
+                            <th scope="row">{{ $index + 1 }}</th>
+                            <td>{{ $m->k_matkul }}</td>
+                            <td>{{ $m->nama_matakuliah }}</td>
+                            <td>{{ $m->semester }}</td>
+                            <td>{{ $m->sks }}</td>
+                            <td>{{ $m->prog_studi }}</td>
+                            <td>
+                                <a href="{{ route('dosen.matkul.nilai', $m->id)}}" class="btn btn-primary btn-sm">
+                                    <i class="bi bi-search">
+
+                                    </i>
+                                </a>
+                            </td>
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>
-                <!-- End Table with stripped rows -->
 
             </div>
         </div>
 </section>
+
 @endsection

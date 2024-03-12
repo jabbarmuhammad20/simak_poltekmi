@@ -1,22 +1,23 @@
-@extends('layouts.master_dosen')
+@extends('layouts.dashboard')
+
 @section('content')
+
 <div class="pagetitle">
-    <h1>Daftar Mahasiswa</h1>
+    <h1>{{ $data['title'] }}</h1>
     <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-        <li class="breadcrumb-item active">Daftar Matakuliah yang Diampu</li>
+        <li class="breadcrumb-item active">{{ $data['title'] }}</li>
       </ol>
     </nav>
-  </div><!-- End Page Title -->
+  </div>
   <section class="section">
     <div class="col-lg-12">
 
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Daftar Matakuliah</h5>
+                <h5 class="card-title">{{ $data['title'] }}</h5>
 
-                <!-- Table with stripped rows -->
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -30,18 +31,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($nilai as $mhs )
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>{{ $mhs->npm }}</td>
-                                
+                        @foreach($data['nilai'] as $index => $mhs )
+                            <tr>
+                                <th scope="row">{{ $index + 1 }}</th>
+                                <td>{{ $mhs->matakuliah->nama_matakuliah }}</td>
+                                <td>{{ $mhs->user->name }}</td>
+                                <td>{{ $mhs->mahasiswa->semester }}</td>
+                                <td>{{ $mhs->matakuliah->sks }}</td>
+                                <td>{{ $mhs->matakuliah->prog_studi }}</td>
+                                <td>
+                                    @if ($mhs->nilai === null)
+                                        Tidak Ada Nilai
+                                    @else 
+                                        {{ $mhs->nilai }}
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
-                <!-- End Table with stripped rows -->
 
             </div>
         </div>
 </section>
+
 @endsection
