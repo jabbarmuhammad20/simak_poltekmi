@@ -12,42 +12,6 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function createDosen(Request $request) 
-    {
-        if ($request->isMethod('POST')) {
-            $this->validate($request,[
-                'email'=>'unique:users',
-            ]);
-
-            $user = User::create([
-                'type' => '0',
-                'name' => $request->name,
-                'npm' => $request->npm,
-                'email' => $request->email,
-                'password' => Hash::make('123456789'), 
-            ]);
-
-            $userId = $user->id;
-
-            Mahasiswa::create([
-                'user_id' => $userId,
-                'npm' => $request->npm,
-                'semester' => $request->semester,
-                'prog_studi' => $request->prog_studi,
-                'k_dosenwali' => $request->k_dosenwali,
-                'aktif' => $request->aktif,
-                'ket' => $request->ket,
-            ]);
-
-            return redirect('dashboard/admin/tambah/mahasiswa')->with('success', 'Mahasiswa Berhasil Ditambahkan !');
-        }
-
-        $data = [
-            'title' => 'Tambah Mahasiswa',
-            'dosen' => Dosen::all(), 
-        ];
-        return view('mahasiswa.tambahMhs', compact('data'));
-    }
 
     public function daftarMahasiswa()
     {
