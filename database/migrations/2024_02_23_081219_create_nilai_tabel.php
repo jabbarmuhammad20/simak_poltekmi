@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('nilai', function (Blueprint $table) {
             $table->id();
-            $table->string('matakuliah_id');
+            $table->integer('matakuliah_id');
             $table->string('k_matakuliah');
-            $table->string('mahasiswa_npm');
+            $table->integer('mahasiswa_npm');
             $table->string('krs')->nullable();
             $table->string('nidn')->nullable();
-            $table->string('nilai')->nullable();
+            $table->integer('nilai')->nullable();
             $table->string('ket')->nullable();
             $table->timestamps();
         });

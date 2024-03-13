@@ -58,8 +58,11 @@ class MahasiswaController extends Controller
                 return $this->response(true, $takeNonExistingIds);
             }
 
+            $findMatakuliah = Matakuliah::findOrFail($request->matakuliah_id);
+            
             Nilai::create([
-                'matakuliah_id' => $request->matakuliah_id,
+                'matakuliah_id' => $findMatakuliah->id,
+                'k_matakuliah' => $findMatakuliah->k_matkul, 
                 'mahasiswa_npm' => Auth::user()->npm,
             ]);
     

@@ -74,11 +74,9 @@ class AdminController extends Controller
                 'password' => Hash::make('123456789'), 
             ]);
 
-            $userId = $user->id;
-
             Mahasiswa::create([
-                'user_id' => $userId,
-                'npm' => $request->npm,
+                'user_id' => $user->id,
+                'npm' => $user->npm,
                 'semester' => $request->semester,
                 'prog_studi' => $request->prog_studi,
                 'k_dosenwali' => $request->k_dosenwali,
@@ -122,11 +120,40 @@ class AdminController extends Controller
         return view('matakuliah.tambahMatkul', compact('data'));
     }
 
+    public function createDosen(Request $request, Dosen $dosen) {
+        if ($request->isMethod('POST')) {
+            $user = User::findOrFail($request->user_id);
+            Dosen::create([
+                'nidn' => $request->nidn,
+                'user_id' => $user->id,
+                'nama' => $user->name,
+                'prog_studi' => $request->prog_studi,
+            ]);
+
+            return redirect('dashboard/admin/tambah/dosen')->with('success', 'Dosen Berhasil Ditambahkan !');
+        }
+
+        $data = [
+            'title' => 'Tambah Dosen',
+            'dosen' => $dosen->getNonDosenIds(),
+        ];
+
+        return view('dosen.tambahDosen', compact('data'));
+    }
+
     public function daftarMatkul(){
         $data = [
             'title' => 'Data Matkul',
             'matkul' => Matakuliah::with('dosen')->get(),
         ];
         return view('matakuliah.daftarMatkul', compact('data'));
+    }
+
+    public function daftarDosen(){
+        $data = [
+            'title' => 'Data Dosen',
+            'dosen' => Dosen::with('user')->get(),
+        ];
+        return view('dosen.daftarDosen', compact('data'));
     }
 }

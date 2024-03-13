@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Matakuliah;
+
 class Dosen extends Model
 {
     use HasFactory;
@@ -19,11 +19,19 @@ class Dosen extends Model
 
     public function Matakuliah()
     {
-     return $this->hasMany('App\Models\Matakuliah');
+     return $this->hasMany(Matakuliah::class);
     }
 
     public function User()
     {
-     return $this->hasMany('App\Models\Matakuliah');
+     return $this->belongsTo(User::class);
+    }
+
+    public function getNonDosenIds()
+    {
+        $existingDosenIds = Dosen::pluck('user_id')->toArray();
+        return User::whereNotIn('id', $existingDosenIds)
+            ->where('type', '2')
+            ->get();
     }
 }
