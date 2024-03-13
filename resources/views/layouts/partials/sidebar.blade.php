@@ -68,25 +68,6 @@
           </li>
         </ul>
       </li>
-      <li class="nav-item">
-        <a class="nav-link " data-bs-target="#forms-dosen" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-journal-text"></i><span>Dosen</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="forms-dosen" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="{{ route('admin.store.dosen')}}" >
-              <i class="bi bi-circle"></i><span>Tambah Dosen</span>
-            </a>
-          </li>
-        </ul>
-        <ul id="forms-dosen" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="{{ route('admin.daftar.dosen')}}">
-              <i class="bi bi-circle"></i><span>Daftar Dosen</span>
-            </a>
-          </li>
-        </ul>
-      </li>
       @elseif(Auth::user()->type === 'dosen')
       <li class="nav-item">
         <a class="nav-link " data-bs-target="#forms-matakuliah" data-bs-toggle="collapse" href="#">
