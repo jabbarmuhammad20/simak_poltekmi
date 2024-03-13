@@ -86,7 +86,17 @@ class AdminController extends Controller
 
     public function createDosen(Request $request, Dosen $dosen) {
         if ($request->isMethod('POST')) {
-            $user = User::findOrFail($request->user_id);
+            $this->validate($request,[
+                'email'=>'unique:users',
+            ]);
+
+            $user = User::create([
+                'type' => '2',
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make('123456789'), 
+            ]);
+
             Dosen::create([
                 'nidn' => $request->nidn,
                 'user_id' => $user->id,

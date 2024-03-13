@@ -16,14 +16,14 @@
         <ul id="forms-dosen" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
           <li>
             <a href="{{ route('admin.store.dosen') }}" >
-              <i class="bi bi-circle"></i><span>Tambah Dosen (soon)</span>
+              <i class="bi bi-circle"></i><span>Tambah Dosen</span>
             </a>
           </li>
         </ul>
         <ul id="forms-dosen" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
           <li>
-            <a href="#">
-              <i class="bi bi-circle"></i><span>Daftar Dosen(Soon)</span>
+            <a href="{{ route('admin.daftar.dosen') }}">
+              <i class="bi bi-circle"></i><span>Daftar Dosen</span>
             </a>
           </li>
         </ul>

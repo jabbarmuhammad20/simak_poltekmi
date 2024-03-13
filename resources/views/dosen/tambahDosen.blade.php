@@ -10,7 +10,7 @@
         <li class="breadcrumb-item active">{{ $data['title'] }}</li>
       </ol>
     </nav>
-  </div><!-- End Page Title -->
+  </div>
 
   <section class="section">
     <div class="row">
@@ -23,24 +23,23 @@
               <form action="{{route ('admin.store.dosen')}}" method="post" class="f1">
                 @csrf
                     <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label">Dosen Wali</label>
-                        <div class="col-sm-10">
-                        <select class="form-select" aria-label="Default select example" name="user_id" id="user_id">
-                            <option selected>Open this select menu</option>
-                            @foreach ($data['dosen'] as $dsn )
-                            <option value="{{$dsn->id}}">{{$dsn->name}}</option>
-                            @endforeach
-                        </select>
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
                         <label for="inputNumber" class="col-sm-2 col-form-label">NIDN</label>
                         <div class="col-sm-10">
                           <input type="number" name="nidn" id="nidn" class="form-control">
                         </div>
                     </div>
-
+                    <div class="row mb-3">
+                        <label for="inputNumber" class="col-sm-2 col-form-label">Nama</label>
+                        <div class="col-sm-10">
+                          <input type="text" name="name" id="name" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="inputNumber" class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-10">
+                          <input type="email" name="email" id="email" class="form-control">
+                        </div>
+                    </div>
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Program Studi</label>
                         <div class="col-sm-10">
@@ -52,7 +51,6 @@
                           </select>
                         </div>
                       </div>
-
                     <div class="row mb-3">
                         <div class="col-sm-10">
                             <button type="submit" class="btn btn-primary">Simpan</button>

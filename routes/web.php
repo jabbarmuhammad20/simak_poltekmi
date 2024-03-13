@@ -53,11 +53,12 @@ Route::middleware(['auth'])->group(function () {
 		Route::middleware(['auth', 'user-access:admin'])->group(function () {
 			Route::prefix('admin')->group(function () { 
 				Route::controller(AdminController::class)->group(function () { 
-					Route::match(['GET', 'POST'], 'tambah/dosen', 'createMahasiswa')->name('admin.store.dosen');
+					Route::match(['GET', 'POST'], 'tambah/dosen', 'createDosen')->name('admin.store.dosen');
 					Route::match(['GET', 'POST'], 'tambah/mahasiswa', 'createMahasiswa')->name('admin.store.mahasiswa');
 					Route::match(['GET', 'POST'], 'tambah/matkul', 'createMatkul')->name('admin.store.matkul');
 					Route::match(['GET'], 'daftar/matkul', 'daftarMatkul')->name('admin.daftar.matkul');
 					Route::match(['GET'], 'daftar/mahasiswa', 'daftarMahasiswa')->name('admin.daftar.mahasiswa');
+					Route::match(['GET'], 'daftar/dosen', 'daftarDosen')->name('admin.daftar.dosen');
 				});
 			});
 		});

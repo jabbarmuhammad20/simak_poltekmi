@@ -60,6 +60,10 @@ class MahasiswaController extends Controller
 
             $findMatakuliah = Matakuliah::findOrFail($request->matakuliah_id);
             
+            if (empty(Auth::user()->npm)) {
+                return $this->response(true, 'NPM anda null, silahkan isi terlebih dahulu');
+            }
+
             Nilai::create([
                 'matakuliah_id' => $findMatakuliah->id,
                 'k_matakuliah' => $findMatakuliah->k_matkul, 
