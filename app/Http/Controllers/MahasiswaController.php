@@ -21,7 +21,7 @@ class MahasiswaController extends Controller
     public function nilai() {
         $data = [
             'title' => 'Data Nilai',
-            'matkul' => Nilai::with('matakuliah','mahasiswa')->get(),
+            'matkul' => Nilai::with('matakuliah','mahasiswa')->where('mahasiswa_npm', Auth::user()->npm)->get(),
         ];
         return view('mhs.nilai.daftarNilai_mhs', compact('data'));
     }
@@ -36,9 +36,7 @@ class MahasiswaController extends Controller
 
     public function krs(Request $request) {
         if ($request->ajax()) {
-            if ($request->isMethod('get')) {
-                return $this->response(true, Matakuliah::with('Nilai')->get());
-            }
+            return $this->response(true, Matakuliah::with('Nilai')->get());
         }
      
         $data = [
