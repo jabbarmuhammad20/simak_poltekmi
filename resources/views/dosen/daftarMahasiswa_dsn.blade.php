@@ -5,19 +5,18 @@
 <div class="pagetitle">
     <h1>{{ $data['title'] }}</h1>
     <nav>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-        <li class="breadcrumb-item active">{{ $data['title'] }}</li>
-      </ol>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active">{{ $data['title'] }}</li>
+        </ol>
     </nav>
-  </div>
-  <section class="section">
+</div>
+<section class="section">
     <div class="col-lg-12">
 
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">{{ $data['title'] }}</h5>
-
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -28,6 +27,7 @@
                             <th scope="col">SKS</th>
                             <th scope="col">Progam</th>
                             <th scope="col">Nilai</th>
+                            <th scope="col">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,11 +40,16 @@
                                 <td>{{ $mhs->matakuliah->sks }}</td>
                                 <td>{{ $mhs->matakuliah->prog_studi }}</td>
                                 <td>
-                                    @if ($mhs->nilai === null)
+                                    @if($mhs->nilai === null)
                                         Tidak Ada Nilai
-                                    @else 
+                                    @else
                                         {{ $mhs->nilai }}
                                     @endif
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#inputnilai"><i class="bi bi-pencil"></i>
+                                    </button>
                                 </td>
                             </tr>
                         @endforeach
@@ -53,6 +58,28 @@
 
             </div>
         </div>
+        <div class="card-body">
+            <div class="modal fade" id="inputnilai" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Masukan Nilai {{$mhs->User->nama}}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row mb-3">
+                                <label for="inputText" class="col-sm-2 col-form-label">Nilai</label>
+                                <div class="col-sm-10">
+                                  <input type="integer" name="nilai" class="form-control">
+                                </div>
+                              </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- End Vertically centered Modal-->
 </section>
-
 @endsection
