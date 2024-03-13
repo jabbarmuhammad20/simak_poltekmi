@@ -40,7 +40,7 @@
                             <td>{{$m->nama_matakuliah}}</td>
                             <td>{{$m->prog_studi}}</td>
                             <td>{{$m->sks}}</td>
-                            <td>{{$m->Dosen->nama}}</td>
+                            <td>{{$m->user[0]->name}}</td>
                           </tr>
                           
                           @endforeach

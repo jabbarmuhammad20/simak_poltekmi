@@ -26,8 +26,8 @@ class Matakuliah extends Model
         return $this->hasMany(Nilai::class);
     }
 
-    public function Dosen()
+    public function User()
     {
-        return $this->belongsTo(Dosen::class);
+        return $this->hasMany(User::class, 'id', 'dosen_id');
     }
 }

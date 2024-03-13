@@ -40,7 +40,7 @@ class DosenController extends Controller
     public function daftarMatkul(){
         $data = [
             'title' => 'Daftar Matakuliah yang Diampu',
-            'matkul' => Matakuliah::where('dosen_id', Auth::user()->id)->get(),
+            'matkul' => Matakuliah::with('user')->where('dosen_id', Auth::user()->id)->get(),
         ];
 
         return view('dosen/daftarMatakuliah_dsn', compact('data'));    

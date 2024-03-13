@@ -82,7 +82,7 @@
                         <select class="form-select" aria-label="Default select example" name="dosen_id">
                             <option selected>Pilih Dosen Pengampu</option>
                             @foreach ($data['dosen'] as $d )
-                            <option value="{{$d->id}}" >{{$d->nidn}}-{{$d->nama}}</option>
+                            <option value="{{$d->user_id}}" >{{$d->nidn}}-{{$d->nama}}</option>
                             @endforeach
                         </select>
                     </div>

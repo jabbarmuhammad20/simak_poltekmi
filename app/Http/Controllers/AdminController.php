@@ -118,8 +118,9 @@ class AdminController extends Controller
     public function daftarMatkul(){
         $data = [
             'title' => 'Data Matkul',
-            'matkul' => Matakuliah::with('dosen')->get(),
+            'matkul' => Matakuliah::with('user')->get(),
         ];
+
         return view('matakuliah.daftarMatkul', compact('data'));
     }
 
