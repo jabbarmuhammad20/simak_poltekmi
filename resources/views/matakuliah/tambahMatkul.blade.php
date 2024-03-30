@@ -26,11 +26,10 @@
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">Tahun Akademik</label>
                     <div class="col-sm-10">
-                        <select class="form-select" aria-label="Default select example" name="tahun_akademik">
+                        <select class="form-select" aria-label="Default select example" name="tahun_akademik_id">
                             <option>Silahkan Pilih Tahun Akademik</option>
                             @foreach ($data['tahunAkademik'] as $t )
-                            <option value="{{$t->tahun_akademik}}">{{$t->tahun_akademik}}</option>
-                                
+                            <option value="{{$t->id}}">{{$t->tahun_akademik}}</option>   
                             @endforeach
                         </select>
                     </div>
@@ -80,10 +79,14 @@
                         <label class="col-sm-2 col-form-label">Dosen Pengampu</label>
                     <div class="col-sm-10">
                         <select class="form-select" aria-label="Default select example" name="dosen_id">
-                            <option selected>Pilih Dosen Pengampu</option>
-                            @foreach ($data['dosen'] as $d )
-                            <option value="{{$d->user_id}}" >{{$d->nidn}}-{{$d->nama}}</option>
-                            @endforeach
+                          @if (Auth::user()->type === 'dosen')
+                          <option value="{{Auth::user()->id}}">{{Auth::user()->Dosen[0]->nidn}}-{{Auth::user()->name}}</option>
+                          @else
+                          <option selected>Pilih Dosen Pengampu</option>
+                          @foreach ($data['dosen'] as $d )
+                          <option value="{{$d->user_id}}" >{{$d->nidn}}-{{$d->nama}}</option>
+                          @endforeach
+                          @endif
                         </select>
                     </div>
                 </div>

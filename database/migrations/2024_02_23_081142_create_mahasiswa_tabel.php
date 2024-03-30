@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('user_id');
             $table->integer('npm')->unique();
             $table->integer('semester');
+            $table->integer('tahun_masuk');
             $table->string('prog_studi');
             $table->string('k_dosenwali');
             $table->string('aktif');

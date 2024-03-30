@@ -25,6 +25,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Kode</th>
+                                <th>T.A</th>
                                 <th>Matakuliah</th>
                                 <th>Program Keahlian</th>
                                 <th>SKS</th>
@@ -36,7 +37,8 @@
                             
                           <tr>
                             <td>1</td>
-                            <td>{{$m->k_matkul}}</td>
+                            <td>{{$m->id}}-{{$m->k_matkul}}</td>
+                            <td>{{$m->tahunakademik[0]->tahun_akademik}}</td>
                             <td>{{$m->nama_matakuliah}}</td>
                             <td>{{$m->prog_studi}}</td>
                             <td>{{$m->sks}}</td>

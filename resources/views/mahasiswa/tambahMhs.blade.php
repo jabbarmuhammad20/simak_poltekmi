@@ -52,6 +52,18 @@
                   </div>
 
                   <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Tahun Masuk</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" aria-label="Default select example" name="tahun_masuk">
+                            <option>Silahkan Pilih Tahun Masuk</option>
+                            @foreach ($data['tahunAkademik'] as $t )
+                            <option value="{{$t->tahun_akademik}}">{{$t->tahun_akademik}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                  <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">Program Studi</label>
                     <div class="col-sm-10">
                       <select class="form-select" aria-label="Default select example" name="prog_studi">

@@ -5,6 +5,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Tahun_Akademik;
 
 class Matakuliah extends Model
 {
@@ -12,12 +13,14 @@ class Matakuliah extends Model
     protected $table = 'matakuliah';
     protected $fillable = [
         'k_matkul',
+        'tahun_akademik_id',
         'dosen_id',
         'prog_studi',
         'nama_matakuliah',
         'sks',
         'semester',
         'aktif',
+        'kunci',
         'ket',
     ];
     
@@ -29,5 +32,15 @@ class Matakuliah extends Model
     public function User()
     {
         return $this->hasMany(User::class, 'id', 'dosen_id');
+    }
+
+    public function tahunakademik()
+    {
+        return $this->hasMany(Tahun_Akademik::class,'id','tahun_akademik_id');
+    }
+
+    public function mahasiswa()
+    {
+        return $this->hasMany(Mahasiswa::class,'id','semester');
     }
 }

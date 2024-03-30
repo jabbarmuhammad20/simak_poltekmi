@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Matakuliah;
 
 class Tahun_Akademik extends Model
 {
@@ -12,4 +13,9 @@ class Tahun_Akademik extends Model
     protected $fillable = [
         'tahun_akademik',
     ];
+    
+    public function matakuliah()
+    {
+        return $this->belongsTo(Matakuliah::class,'id','tahun_akademik_id');
+    }
 }

@@ -15,6 +15,7 @@ class Nilai extends Model
         'mahasiswa_npm',
         'krs',
         'nidn',
+        'kunci',
         'nilai',
         'ket',
     ];

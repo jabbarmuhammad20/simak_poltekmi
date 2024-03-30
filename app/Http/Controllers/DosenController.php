@@ -15,7 +15,7 @@ class DosenController extends Controller
         if ($request->isMethod('POST')) {
             Matakuliah::create([
                 'dosen_id' => $request->dosen_id,
-                'tahun_akademik' => $request->tahun_akademik,
+                'tahun_akademik_id' => $request->tahun_akademik_id,
                 'k_matkul' => $request->k_matkul,
                 'nama_matakuliah' => $request->nama_matakuliah,
                 'prog_studi' => $request->prog_studi,
@@ -33,14 +33,15 @@ class DosenController extends Controller
             'dosen' => Dosen::all(),
             'tahunAkademik' => Tahun_Akademik::all(),
         ];
-
+        
         return view('matakuliah.tambahMatkul', compact('data'));
     }
-
+    
     public function daftarMatkul(){
         $data = [
             'title' => 'Daftar Matakuliah yang Diampu',
             'matkul' => Matakuliah::with('user')->where('dosen_id', Auth::user()->id)->get(),
+            'tahun_akademik' => Tahun_Akademik::all(),
         ];
 
         return view('dosen/daftarMatakuliah_dsn', compact('data'));    
@@ -50,8 +51,16 @@ class DosenController extends Controller
         $data = [
             'title' => 'Data Nilai Mahasiswa',
             'nilai' => Nilai::with('mahasiswa', 'matakuliah', 'user')->where('matakuliah_id', $id)->get(),
+            // 'kunci' => Nilai::where('kunci','0')->get(),
         ];
 
         return view('dosen/daftarMahasiswa_dsn', compact('data'));
+    }
+
+    public function input_nilai(Request $request, $id){
+        $nilai = Nilai::findOrFail($id);
+        $nilai ->nilai=$request->input('nilai');
+        $nilai->update();
+        return redirect()->back()->with('success', 'Nilai Berhasil ditambah !');
     }
 }

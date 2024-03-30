@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('mahasiswa_npm');
             $table->string('krs')->nullable();
             $table->string('nidn')->nullable();
+            $table->integer('kunci')->nullable();
             $table->integer('nilai')->nullable();
             $table->string('ket')->nullable();
             $table->timestamps();

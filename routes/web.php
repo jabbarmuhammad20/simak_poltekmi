@@ -27,6 +27,10 @@ Route::get('ressetconfig', function (){
 	Artisan::call('config:cache');
 });
 
+Route::get('/teamplat_nilai', function () {
+	return Storage::download('Upload_Nilai.xlsx')->name('teamplat_nilai');
+});
+
 Route::controller(LoginController::class)->group(function () {
 	route::get('/',[LoginController::class,'showLoginForm'])->name('/');
 	Route::get('logout', [LoginController::class,'logout']);  
@@ -59,6 +63,9 @@ Route::middleware(['auth'])->group(function () {
 					Route::match(['GET'], 'daftar/matkul', 'daftarMatkul')->name('admin.daftar.matkul');
 					Route::match(['GET'], 'daftar/mahasiswa', 'daftarMahasiswa')->name('admin.daftar.mahasiswa');
 					Route::match(['GET'], 'daftar/dosen', 'daftarDosen')->name('admin.daftar.dosen');
+					Route::match(['GET'], 'daftar/nilai', 'daftarnilaiMahasiswa')->name('admin.daftar.nilai');
+					Route::match(['POST'], 'importnilai', 'importnilaiMahasiswa')->name('admin.importnilai');
+					Route::match(['GET'], 'deleted/nilai/{id}', 'deleted_nilai')->name('admin.delete.nilai');
 				});
 			});
 		});
@@ -69,6 +76,7 @@ Route::middleware(['auth'])->group(function () {
 					Route::match(['GET', 'POST'], 'tambah/matkul', 'createMatkul')->name('dosen.store.matkul');
 					Route::match(['GET'], 'daftar/matkul', 'daftarMatkul')->name('dosen.daftar.matkul');
 					Route::match(['GET'], 'daftar/matkul/{id}/nilai', 'getNilaiByMatkul')->name('dosen.matkul.nilai');
+					Route::match(['PUT'], 'inputnilai/{id}', 'input_nilai')->name('dosen.input.nilai');
 				});
 			});
 		});

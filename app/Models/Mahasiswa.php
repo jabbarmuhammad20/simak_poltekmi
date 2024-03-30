@@ -12,7 +12,7 @@ class Mahasiswa extends Model
     protected $fillable = [
         'user_id',
         'npm',
-        'tahun_akademik',
+        'tahun_masuk',
         'semester',
         'prog_studi',
         'k_dosenwali',
@@ -23,5 +23,9 @@ class Mahasiswa extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+    public function matakuliah()
+    {
+        return $this->belongsTo(Matakuliah::class,'semester');
     }
 }

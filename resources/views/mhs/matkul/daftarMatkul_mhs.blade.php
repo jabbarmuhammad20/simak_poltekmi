@@ -15,7 +15,7 @@
 
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">{{ $data['title'] }}</h5>
+            <h5 class="card-title">{{ $data['title'] }} | T.A {{$setting->tahun_akademik}} | @if ($setting->ganjil_genap == 1) Ganjil @else Genap @endif</h5>
 
             <!-- Table with stripped rows -->
             <table class="table table-striped">
@@ -30,15 +30,16 @@
               </thead>
               <tbody>
                 @foreach ($data['matkul'] as $index => $mt )
-                  
-                <tr>
-                  <th scope="row">{{ $index + 1}}</th>
-                  <td>{{$mt->k_matkul}}</td>
-                  <td>{{$mt->nama_matakuliah}}</td>
-                  <td>{{$mt->sks}}</td>
-                  <td>{{$mt->semester}}</td>
-                </tr>
-                @endforeach
+              @if ( Auth::user()->Mahasiswa->semester == '1')
+              <tr>
+                <th scope="row">{{ $index + 1}}</th>
+                <td>{{$mt->k_matkul}}</td>
+                <td>{{$mt->nama_matakuliah}}</td>
+                <td>{{$mt->sks}}</td>
+                <td>{{$mt->semester}}</td>
+              </tr>
+              @endif
+              @endforeach
               </tbody>
             </table>
 

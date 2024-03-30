@@ -47,6 +47,13 @@
             </a>
           </li>
         </ul>
+        <ul id="forms-mahasiswa" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{{ route('admin.daftar.nilai')}}">
+              <i class="bi bi-circle"></i><span>Daftar Nilai</span>
+            </a>
+          </li>
+        </ul>
       </li>
 
       <li class="nav-item">

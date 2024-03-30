@@ -19,7 +19,9 @@ return new class extends Migration
             $table->string('nama_matakuliah');
             $table->integer('sks');
             $table->integer('semester');
+            $table->string('tahun_akademik');
             $table->string('aktif');
+            $table->integer('kunci');
             $table->string('ket');
             $table->timestamps();
         });
