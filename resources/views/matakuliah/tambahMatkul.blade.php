@@ -37,11 +37,11 @@
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">Program Studi</label>
                     <div class="col-sm-10">
-                        <select class="form-select" aria-label="Default select example" name="prog_studi">
+                        <select class="form-select" aria-label="Default select example" name="programstudi_id">
                             <option>Silahkan Pilih Program Studi</option>
-                            <option value="trpl">Teknologi Rekayasa Perangkat Lunak</option>
-                            <option value="trm">Teknologi Rekayasa Multimedia</option>
-                            <option value="bdl">Bisnis Digital</option>
+                            @foreach ($data['programStudi'] as $prog )
+                            <option value="{{$prog->id}}">{{$prog->programstudi}}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>

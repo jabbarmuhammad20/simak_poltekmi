@@ -15,7 +15,7 @@ class Matakuliah extends Model
         'k_matkul',
         'tahun_akademik_id',
         'dosen_id',
-        'prog_studi',
+        'programstudi_id',
         'nama_matakuliah',
         'sks',
         'semester',
@@ -42,5 +42,9 @@ class Matakuliah extends Model
     public function mahasiswa()
     {
         return $this->hasMany(Mahasiswa::class,'id','semester');
+    }
+    public function programstudi()
+    {
+        return $this->belongsTo(Programstudi::class,'id','programstudi');
     }
 }

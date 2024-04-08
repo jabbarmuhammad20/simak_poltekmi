@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('k_matkul')->unique();
             $table->integer('dosen_id');
-            $table->string('prog_studi');
+            $table->string('programstudi_id');
             $table->string('nama_matakuliah');
             $table->integer('sks');
             $table->integer('semester');

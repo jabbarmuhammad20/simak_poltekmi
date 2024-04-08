@@ -26,6 +26,6 @@ class Mahasiswa extends Model
     }
     public function matakuliah()
     {
-        return $this->belongsTo(Matakuliah::class,'semester');
+        return $this->belongsTo(Matakuliah::class,);
     }
 }

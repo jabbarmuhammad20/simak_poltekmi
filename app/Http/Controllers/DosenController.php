@@ -5,6 +5,7 @@ use App\Models\Dosen;
 use App\Models\Matakuliah;
 use App\Models\Tahun_Akademik;
 use App\Models\Nilai;
+use App\Models\Programstudi;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,7 @@ class DosenController extends Controller
                 'tahun_akademik_id' => $request->tahun_akademik_id,
                 'k_matkul' => $request->k_matkul,
                 'nama_matakuliah' => $request->nama_matakuliah,
-                'prog_studi' => $request->prog_studi,
+                'programstudi_id' => $request->programstudi_id,
                 'sks' => $request->sks,
                 'semester' => $request->semester,
                 'ket' => $request->ket,
@@ -32,6 +33,7 @@ class DosenController extends Controller
             'title' => 'Tambah Matkul',
             'dosen' => Dosen::all(),
             'tahunAkademik' => Tahun_Akademik::all(),
+            'programStudi' => Programstudi::all(),
         ];
         
         return view('matakuliah.tambahMatkul', compact('data'));
@@ -40,11 +42,23 @@ class DosenController extends Controller
     public function daftarMatkul(){
         $data = [
             'title' => 'Daftar Matakuliah yang Diampu',
-            'matkul' => Matakuliah::with('user')->where('dosen_id', Auth::user()->id)->get(),
-            'tahun_akademik' => Tahun_Akademik::all(),
+            'matkul' => Matakuliah::with('user','tahunakademik','programstudi')->where('dosen_id', Auth::user()->id)->get(),
         ];
+        $tahun_akademik = Tahun_Akademik::all();
+        $prog = Programstudi::all();
+        
+        return view('dosen/daftarMatakuliah_dsn', compact('data','tahun_akademik','prog'));    
+    }
 
-        return view('dosen/daftarMatakuliah_dsn', compact('data'));    
+    public function updateMatkul(){
+        $data = [
+            'title' => 'Daftar Matakuliah yang Diampu',
+            'matkul' => Matakuliah::with('user')->where('dosen_id', Auth::user()->id)->get(),
+        ];
+        $tahun_akademik = Tahun_Akademik::all();
+        $prog = Programstudi::all();
+        
+        return view('dosen/daftarMatakuliah_dsn', compact('data','tahun_akademik','prog'));    
     }
 
     public function getNilaiByMatkul($id){

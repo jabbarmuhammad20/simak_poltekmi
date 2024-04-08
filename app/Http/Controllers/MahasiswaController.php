@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\Matakuliah;
+use App\Models\Mahasiswa;
 use App\Models\Nilai;
 use App\Models\Setting;
 use Illuminate\Http\Request;
@@ -29,8 +30,7 @@ class MahasiswaController extends Controller
     public function daftarMatkul() {
         $data = [
             'title' => 'Daftar Matakuliah Aktif',
-            // 'matkul' => Matakuliah::all(),
-            'matkul' => Matakuliah::with('mahasiswa')->get(),
+            'matkul' => Matakuliah::with('mahasiswa')->where('prog_studi',Auth::user()->Mahasiswa[0]->prog_studi,)->get(),
         ];
         $setting = Setting::all()->first();
         return view('mhs.matkul.daftarMatkul_mhs', compact('data','setting'));
