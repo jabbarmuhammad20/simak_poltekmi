@@ -31,7 +31,7 @@
                     <tbody>
                         @foreach($data['matkul'] as $index => $m)
                             <tr>
-                                <th scope="row">{{ $index + 1 }}</th>
+                                <td scope="row">{{ $index + 1 }}</td>
                                 <td>{{ $m->id }}-{{ $m->k_matkul }}</td>
                                 <td>{{ $m->nama_matakuliah }}</td>
                                 <td>{{ $m->semester }}</td>
@@ -83,11 +83,11 @@
                                         </div><!-- End Vertically centered Modal-->
 
                                     @else
-                                    <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#largeModal">
+                                    <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#largeModal{{$m->id}}">
                                         <i class="bi bi-unlock"></i>
                                       </button>
                         
-                                      <div class="modal fade" id="largeModal" tabindex="-1">
+                                      <div class="modal fade" id="largeModal{{$m->id}}" value="{{$m->id}}" tabindex="-1">
                                         <div class="modal-dialog modal-lg">
                                           <div class="modal-content">
                                             <div class="modal-header">
@@ -126,7 +126,7 @@
                                                             <label for="inputPassword5" class="form-label">Tahun Akademik</label>
                                                             <select class="form-select"
                                                                         aria-label="Default select example">
-                                                                        <option selected value="{{$m->tahunakademik[0]->tahun_akademik_id}}"> <span class="error">*</span> {{$m->tahunakademik[0]->tahun_akademik}}
+                                                                        <option selected value="{{$m->tahunakademik_id}}"> <span class="error">*</span> {{$m->tahunakademik[0]->tahun_akademik}}
                                                                         </option>
                                                                         @foreach ($tahun_akademik as $akademik)
                                                                         <option value="{{ $akademik->id}}">

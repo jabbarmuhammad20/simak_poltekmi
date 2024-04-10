@@ -25,7 +25,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Tahun Masuk</th>
+                                <th>T.A</th>
                                 <th>Program Studi</th>
                                 <th>Nama</th>
                                 <th>NPM</th>
@@ -38,8 +38,8 @@
                           @foreach ($data['nilai'] as $index => $m )
                             <tr>
                                 <td>{{ $index + 1 }}</td>
-                                <td>{{ $m->mahasiswa->tahun_masuk }}</td>
-                                <td>{{ $m->mahasiswa->prog_studi }}</td>
+                                <td>{{ $m->tahunakademik->tahun_akademik }}</td>
+                                <td>{{ $m->mahasiswa->programstudi->programstudi }}</td>
                                 <td>{{ $m->user->name }}</td>
                                 <td>{{ $m->mahasiswa->npm }}</td>
                                 <td>{{ $m->matakuliah->nama_matakuliah }}</td>

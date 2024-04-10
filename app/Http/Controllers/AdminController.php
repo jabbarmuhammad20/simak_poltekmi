@@ -7,6 +7,7 @@ use App\Models\Mahasiswa;
 use App\Models\User;
 use App\Models\Tahun_Akademik;
 use App\Models\Matakuliah;
+use App\Models\Programstudi;
 use App\Models\Nilai;
 use Excel;
 use App\Imports\NilaiImport;
@@ -21,7 +22,7 @@ class AdminController extends Controller
     {
         $data = [
             'title' => 'Daftar Mahasiswa',
-            'mahasiswa' => Mahasiswa::with('user')->get(),
+            'mahasiswa' => Mahasiswa::with('user','programstudi')->get(),
         ];
 
         return view('mahasiswa.daftarMhs', compact('data'));
@@ -50,7 +51,7 @@ class AdminController extends Controller
                 'name' => $request->name,
                 'npm' => $request->npm,
                 'email' => $request->email,
-                'password' => Hash::make('123456789'), 
+                'password' => Hash::make('123456'), 
             ]);
 
             Mahasiswa::create([
@@ -58,7 +59,7 @@ class AdminController extends Controller
                 'npm' => $user->npm,
                 'semester' => $request->semester,
                 'tahun_masuk' => $request->tahun_masuk,
-                'prog_studi' => $request->prog_studi,
+                'programstudi_id' => $request->programstudi_id,
                 'k_dosenwali' => $request->k_dosenwali,
                 'aktif' => $request->aktif,
                 'ket' => $request->ket,
@@ -71,6 +72,7 @@ class AdminController extends Controller
             'title' => 'Tambah Mahasiswa',
             'dosen' => Dosen::all(), 
             'tahunAkademik' => Tahun_Akademik::all(),
+            'program' => Programstudi::all(),
         ];
         return view('mahasiswa.tambahMhs', compact('data'));
     }
@@ -79,10 +81,10 @@ class AdminController extends Controller
         if ($request->isMethod('POST')) {
             Matakuliah::create([
                 'dosen_id' => $request->dosen_id,
-                'tahun_akademik_id' => $request->tahun_akademik_id,
+                'tahunakademik_id' => $request->tahunakademik_id,
                 'k_matkul' => $request->k_matkul,
                 'nama_matakuliah' => $request->nama_matakuliah,
-                'prog_studi' => $request->prog_studi,
+                'programstudi_id' => $request->programstudi_id,
                 'sks' => $request->sks,
                 'semester' => $request->semester,
                 'ket' => $request->ket,
@@ -96,6 +98,7 @@ class AdminController extends Controller
             'title' => 'Tambah Matkul',
             'dosen' => Dosen::all(),
             'tahunAkademik' => Tahun_Akademik::all(),
+            'programstudi' => Programstudi::all(),
         ];
 
         return view('matakuliah.tambahMatkul', compact('data'));
@@ -118,7 +121,7 @@ class AdminController extends Controller
                 'nidn' => $request->nidn,
                 'user_id' => $user->id,
                 'nama' => $user->name,
-                'prog_studi' => $request->prog_studi,
+                'programstudi_id' => $request->programstudi_id,
             ]);
 
             return redirect('dashboard/admin/tambah/dosen')->with('success', 'Dosen Berhasil Ditambahkan !');
@@ -135,7 +138,7 @@ class AdminController extends Controller
     public function daftarMatkul(){
         $data = [
             'title' => 'Data Matkul',
-            'matkul' => Matakuliah::with('user','tahunakademik')->get(),
+            'matkul' => Matakuliah::with('user','tahunakademik','programstudi')->get(),
         ];
 
         return view('matakuliah.daftarMatkul', compact('data'));
@@ -160,4 +163,10 @@ class AdminController extends Controller
     return redirect('/dashboard/admin/daftar/nilai')->with('success', 'Nilai Berhasil Dihapus !');
     }
 
+    public function pengaturan(){
+        $data = [
+            'title' => 'Pengaturan',
+        ];
+        return view('setting/tahunAkademik', compact('data'));
+    }
 }

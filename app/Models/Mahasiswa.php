@@ -14,7 +14,7 @@ class Mahasiswa extends Model
         'npm',
         'tahun_masuk',
         'semester',
-        'prog_studi',
+        'programstudi_id',
         'k_dosenwali',
         'aktif',
         'ket',
@@ -26,6 +26,10 @@ class Mahasiswa extends Model
     }
     public function matakuliah()
     {
-        return $this->belongsTo(Matakuliah::class,);
+        return $this->belongsTo(Matakuliah::class,'semester','id');
+    }
+    public function programstudi()
+    {
+        return $this->belongsTo(Programstudi::class,'programstudi_id','id');
     }
 }

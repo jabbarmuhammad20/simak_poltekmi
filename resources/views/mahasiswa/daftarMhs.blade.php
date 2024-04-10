@@ -36,7 +36,7 @@
                                 <td>{{ $m->user->name }}</td>
                                 <td>{{ $m->npm }}</td>
                                 <td>{{ $m->semester }}</td>
-                                <td>{{ $m->prog_studi }}</td>
+                                <td>{{ $m->programstudi->programstudi }}</td>
                             </tr>
                           @endforeach
                         </tbody>

@@ -13,7 +13,7 @@ class Matakuliah extends Model
     protected $table = 'matakuliah';
     protected $fillable = [
         'k_matkul',
-        'tahun_akademik_id',
+        'tahunakademik_id',
         'dosen_id',
         'programstudi_id',
         'nama_matakuliah',
@@ -36,15 +36,16 @@ class Matakuliah extends Model
 
     public function tahunakademik()
     {
-        return $this->hasMany(Tahun_Akademik::class,'id','tahun_akademik_id');
+        return $this->hasMany(Tahun_Akademik::class,'id','tahunakademik_id');
     }
 
     public function mahasiswa()
     {
-        return $this->hasMany(Mahasiswa::class,'id','semester');
+        return $this->hasMany(Mahasiswa::class,'semester','id');
     }
+
     public function programstudi()
     {
-        return $this->belongsTo(Programstudi::class,'id','programstudi');
+        return $this->hasMany(Programstudi::class,'id','programstudi_id');
     }
 }

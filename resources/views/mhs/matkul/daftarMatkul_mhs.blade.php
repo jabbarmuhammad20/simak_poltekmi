@@ -30,16 +30,15 @@
               </thead>
               <tbody>
                 @foreach ($data['matkul'] as $index => $mt )
-              @if ( $mt->semester == Auth::user()->Mahasiswa[0]->semester)
-              @elseif ($mt->tahun_akademik_id == $setting->id)
+              {{-- @if ($mt->tahunakademik[0]->tahun_akademik == $setting->tahun_akademik) --}}
               <tr>
-                <th scope="row">{{ $index + 1}}</th>
+                <td scope="row">{{ $index + 1}}</th>
                 <td>{{$mt->k_matkul}}</td>
                 <td>{{$mt->nama_matakuliah}}</td>
                 <td>{{$mt->sks}}</td>
                 <td>{{$mt->semester}}</td>
               </tr>
-              @endif
+              {{-- @endif --}}
               @endforeach
               </tbody>
             </table>

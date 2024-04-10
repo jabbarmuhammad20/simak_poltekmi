@@ -6,6 +6,7 @@ use App\Models\Matakuliah;
 use App\Models\Tahun_Akademik;
 use App\Models\Nilai;
 use App\Models\Programstudi;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,7 @@ class DosenController extends Controller
         if ($request->isMethod('POST')) {
             Matakuliah::create([
                 'dosen_id' => $request->dosen_id,
-                'tahun_akademik_id' => $request->tahun_akademik_id,
+                'tahunakademik_id' => $request->tahunakademik_id,
                 'k_matkul' => $request->k_matkul,
                 'nama_matakuliah' => $request->nama_matakuliah,
                 'programstudi_id' => $request->programstudi_id,
@@ -33,7 +34,7 @@ class DosenController extends Controller
             'title' => 'Tambah Matkul',
             'dosen' => Dosen::all(),
             'tahunAkademik' => Tahun_Akademik::all(),
-            'programStudi' => Programstudi::all(),
+            'programstudi' => Programstudi::all(),
         ];
         
         return view('matakuliah.tambahMatkul', compact('data'));
@@ -64,9 +65,13 @@ class DosenController extends Controller
     public function getNilaiByMatkul($id){
         $data = [
             'title' => 'Data Nilai Mahasiswa',
-            'nilai' => Nilai::with('mahasiswa', 'matakuliah', 'user')->where('matakuliah_id', $id)->get(),
-            // 'kunci' => Nilai::where('kunci','0')->get(),
+            'nilai' => Nilai::with('mahasiswa', 'matakuliah', 'user', 'programstudi','tahunakademik')
+            ->where('matakuliah_id', $id)
+            // ''->where('tahunakademik_id','id')
+            ->get(),
+            'setting' => Setting::all()->first(),
         ];
+
 
         return view('dosen/daftarMahasiswa_dsn', compact('data'));
     }

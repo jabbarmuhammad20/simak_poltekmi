@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('matakuliah', function (Blueprint $table) {
             $table->id();
-            $table->string('k_matkul')->unique();
+            $table->string('k_matkul');
             $table->integer('dosen_id');
             $table->string('programstudi_id');
             $table->string('nama_matakuliah');

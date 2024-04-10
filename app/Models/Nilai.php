@@ -10,14 +10,15 @@ class Nilai extends Model
     use HasFactory;
     protected $table = 'nilai';
     protected $fillable = [
+        'tahunakademik_id',
         'matakuliah_id',
-        'k_matakuliah',
         'mahasiswa_npm',
+        'k_matakuliah',
         'krs',
         'nidn',
         'kunci',
         'nilai',
-        'ket',
+        'ket'
     ];
 
     public function matakuliah()
@@ -33,5 +34,20 @@ class Nilai extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'mahasiswa_npm', 'npm');
+    }
+
+    public function tahunakademik()
+    {
+        return $this->belongsTo(Tahun_Akademik::class,'tahunakademik_id','id');
+    }
+    
+    public function programstudi()
+    {
+        return $this->hasMany(Programstudi::class,'programstudi','id');
+    }
+
+    public function setting()
+    {
+        return $this->hasMany(Programstudi::class,'tahun_akademik','id');
     }
 }

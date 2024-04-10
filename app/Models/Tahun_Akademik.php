@@ -9,13 +9,18 @@ use App\Models\Matakuliah;
 class Tahun_Akademik extends Model
 {
     use HasFactory;
-    protected $table = 'tahun_akademik';
+    protected $table = 'tahunakademik';
     protected $fillable = [
         'tahun_akademik',
     ];
     
     public function matakuliah()
     {
-        return $this->belongsTo(Matakuliah::class,'id','tahun_akademik_id');
+        return $this->belongsTo(Matakuliah::class,'id','tahunakademik_id');
     }
+    public function nilai()
+    {
+        return $this->belongsTo(Nilai::class,'tahunakademik_id','id');
+    }
+    
 }

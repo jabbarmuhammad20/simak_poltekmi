@@ -25,7 +25,7 @@
                             <th scope="col">NIDN</th>
                             <th scope="col">Nama</th>
                             <th scope="col">Program Studi</th>
-                        </tr>
+                        </tr> 
                     </thead>
                     <tbody>
                         @foreach($data['dosen'] as $index => $dosen )

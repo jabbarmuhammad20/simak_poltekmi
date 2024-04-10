@@ -30,7 +30,10 @@ class MahasiswaController extends Controller
     public function daftarMatkul() {
         $data = [
             'title' => 'Daftar Matakuliah Aktif',
-            'matkul' => Matakuliah::with('mahasiswa')->where('prog_studi',Auth::user()->Mahasiswa[0]->prog_studi,)->get(),
+            'matkul' => Matakuliah::with('programstudi','mahasiswa','tahunakademik')
+            ->where('programstudi_id',Auth::user()->Mahasiswa[0]->programstudi_id)
+            // ->where('semester',Auth::user()->Mahasiswa[0]->semester)
+            ->get(),
         ];
         $setting = Setting::all()->first();
         return view('mhs.matkul.daftarMatkul_mhs', compact('data','setting'));

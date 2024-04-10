@@ -16,6 +16,15 @@ class Programstudi extends Model
 
     public function matakuliah()
     {
-        return $this->hasMany(Matakuliah::class,'id','matakuliah_id');
+        return $this->belongsTo(Matakuliah::class,'id','matakuliah_id');
+    }
+    public function mahasiswa()
+    {
+        return $this->belongsTo(Mahasiswa::class,'id','programstudi_id');
+    }
+
+    public function nilai()
+    {
+        return $this->belongsTo(Nilai::class,'programstudi_id','id');
     }
 }

@@ -11,12 +11,10 @@ class NilaiImport implements ToCollection,WithHeadingRow
 {
     public function collection(Collection $rows)
     {
-            // $nilai = Mahasiswa ::where('npm',$row['npm'])->first();
-            
-            // if($nilai != null ){
             foreach ($rows as $row) 
             {
                 Nilai::create([
+                    'tahunakademik_id' => $row['tahunakademik_id'],
                     'matakuliah_id' => $row['matakuliah_id'],
                     'mahasiswa_npm' => $row['npm'],
                     'k_matakuliah' => $row['k_matakuliah'],

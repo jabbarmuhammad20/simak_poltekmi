@@ -13,4 +13,9 @@ class Setting extends Model
        'tahun_akademik',
        'ganjil_genap',
     ];
+
+    public function nilai()
+    {
+        return $this->belongsTo(Nilai::class,'tahunakademik_id','id');
+    }
 }

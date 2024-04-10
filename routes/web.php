@@ -25,6 +25,7 @@ Route::get('ressetconfig', function (){
 	Artisan::call('cache:clear');
 	Artisan::call('config:clear');
 	Artisan::call('config:cache');
+
 });
 
 Route::get('/teamplat_nilai', function () {

@@ -40,7 +40,7 @@
                             <td>{{$m->id}}-{{$m->k_matkul}}</td>
                             <td>{{$m->tahunakademik[0]->tahun_akademik}}</td>
                             <td>{{$m->nama_matakuliah}}</td>
-                            <td>{{$m->prog_studi}}</td>
+                            <td>{{$m->programstudi[0]->programstudi}}</td>
                             <td>{{$m->sks}}</td>
                             <td>{{$m->user[0]->name}}</td>
                           </tr>
