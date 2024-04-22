@@ -21,6 +21,5 @@ class NilaiImport implements ToCollection,WithHeadingRow
                     'nilai' => $row['nilai'],
                 ]);
             }
-        }
     }
-// }
+}

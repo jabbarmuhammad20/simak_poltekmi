@@ -8,9 +8,12 @@ use App\Models\User;
 use App\Models\Tahun_Akademik;
 use App\Models\Matakuliah;
 use App\Models\Programstudi;
+use App\Models\Setting;
 use App\Models\Nilai;
+use App\Exports\Update_semesterExport;
 use Excel;
 use App\Imports\NilaiImport;
+use App\Imports\Update_semesterImport;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -28,6 +31,53 @@ class AdminController extends Controller
         return view('mahasiswa.daftarMhs', compact('data'));
     }
 
+    public function verMatkul(){
+        $data = [
+            'title' => 'Daftar Matakuliah yang Diampu',
+            'matkul' => Matakuliah::with('user','tahunakademik','programstudi')
+            // ->where('dosen_id', Auth::user()->id)
+            ->get(),
+        ];
+        $tahun_akademik = Tahun_Akademik::all();
+        $prog = Programstudi::all();
+        
+        return view('mahasiswa.verifikasiMatkul_adm', compact('data','tahun_akademik','prog'));    
+    }
+
+    public function getNilaiByMatkul($id){
+        $data = [
+            'title' => 'Data Nilai Mahasiswa',
+            'nilai' => Nilai::with('mahasiswa', 'matakuliah', 'user', 'programstudi','tahunakademik')
+            ->where('matakuliah_id', $id)
+            // ''->where('tahunakademik_id','id')
+            ->get(),
+            'setting' => Setting::all()->first(),
+        ];
+        return view('mahasiswa/verifikasiNilai_adm', compact('data'));
+    }
+
+    public function input_nilai(Request $request, $id){
+        $nilai = Nilai::findOrFail($id);
+        $nilai ->nilai=$request->input('nilai');
+        $nilai ->kunci=$request->input('kunci');
+        $nilai->update();
+        return redirect()->back()->with('success', 'Nilai Berhasil diubah !');
+    }
+    public function updateMatkul(Request $request, $id){
+        $matkul = Matakuliah::findOrFail($id);
+        $matkul ->k_matkul=$request->input('k_matkul');
+        $matkul ->dosen_id=$request->input('dosen_id');
+        $matkul ->programstudi_id=$request->input('programstudi_id');
+        $matkul ->nama_matakuliah=$request->input('nama_matakuliah');
+        $matkul ->sks=$request->input('sks');
+        $matkul ->semester=$request->input('semester');
+        $matkul ->tahunakademik_id=$request->input('tahunakademik_id');
+        $matkul ->aktif=$request->input('aktif');
+        $matkul ->kunci=$request->input('kunci');
+        $matkul->update();
+        return redirect()->back()->with('success', 'Nilai Berhasil diubah !');
+    }
+
     public function daftarnilaiMahasiswa()
     {
         $data = [
@@ -37,7 +87,6 @@ class AdminController extends Controller
 
         return view('mahasiswa.daftarnilaiMhs', compact('data'));
     }
-
 
     public function createMahasiswa(Request $request) 
     {
@@ -151,6 +200,17 @@ class AdminController extends Controller
         ];
         return view('dosen.daftarDosen', compact('data'));
     }
+
+    // Update data semester
+    public function update_semesterExport() 
+    {
+        return Excel::download(new Update_semesterExport, 'update_semester.xlsx');
+    }
+    public function update_semesterImport(Request $request){
+        Excel::import(new Update_semesterImport, request()->file('file'));
+    return redirect()->back()->with('success', 'Data Semester Berhasil Diubah !');
+    }
+
 
     public function importnilaiMahasiswa(Request $request){
         Excel::import(new NilaiImport, request()->file('file'));

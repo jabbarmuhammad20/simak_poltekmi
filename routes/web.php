@@ -65,8 +65,15 @@ Route::middleware(['auth'])->group(function () {
 					Route::match(['GET'], 'daftar/mahasiswa', 'daftarMahasiswa')->name('admin.daftar.mahasiswa');
 					Route::match(['GET'], 'daftar/dosen', 'daftarDosen')->name('admin.daftar.dosen');
 					Route::match(['GET'], 'daftar/nilai', 'daftarnilaiMahasiswa')->name('admin.daftar.nilai');
+					Route::match(['GET'], 'verMatkul', 'verMatkul')->name('admin.daftar.matkul');
+					Route::match(['GET'], 'daftar/matkul/{id}/nilai', 'getNilaiByMatkul')->name('admin.matkul.nilai');
+					Route::match(['PUT'], 'inputnilai/{id}nilai', 'input_nilai')->name('admin.input.nilai');
+					Route::match(['PUT'], 'inputnilai/{id}', 'updateMatkul')->name('admin.update.matkul');
 					Route::match(['POST'], 'importnilai', 'importnilaiMahasiswa')->name('admin.importnilai');
 					Route::match(['GET'], 'deleted/nilai/{id}', 'deleted_nilai')->name('admin.delete.nilai');
+					Route::match(['GET'], 'daftar/matkul/{id}/nilai', 'getNilaiByMatkul')->name('admin.matkul.nilai');
+					Route::match(['GET'], 'update_semesterExport', 'update_semesterExport')->name('admin.update.export');
+					Route::match(['PUT'], 'update_semesterImport', 'update_semesterImport')->name('admin.update.Import');
 				});
 			});
 		});
