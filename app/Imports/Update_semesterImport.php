@@ -7,20 +7,22 @@ use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class Update_semesterImport implements ToCollection,WithHeadingRow
+class Update_semesterImport implements ToCollection, WithHeadingRow
 {
     /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
+    * @param Collection $rows
     */
     public function collection(Collection $rows)
     {
-            foreach ($rows as $row) 
-            {
-                $mahasiswa = Mahasiswa::find($row['NPM'])->get();
-                $mahasiswa->semester = $row['Semester'];
-                $mahasiswa->update();
+        foreach ($rows as $row) {
+            $mahasiswa = Mahasiswa::where('npm', $row['npm'])->first();
+
+            if ($mahasiswa) {
+                $mahasiswa->semester = $row['semester'];
+                $mahasiswa->save();
+            } else {
+                echo "Mahasiswa with npm: {$row['npm']} not found.\n";
             }
+        }
     }
 }

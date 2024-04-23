@@ -10,11 +10,10 @@ use App\Models\Matakuliah;
 use App\Models\Programstudi;
 use App\Models\Setting;
 use App\Models\Nilai;
-use App\Exports\Update_semesterExport;
-use Excel;
 use App\Imports\NilaiImport;
 use App\Imports\Update_semesterImport;
-
+use App\Exports\Update_semesterExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
@@ -206,21 +205,22 @@ class AdminController extends Controller
     {
         return Excel::download(new Update_semesterExport, 'update_semester.xlsx');
     }
-    public function update_semesterImport(Request $request){
+
+    public function update_semesterImport(){
         Excel::import(new Update_semesterImport, request()->file('file'));
-    return redirect()->back()->with('success', 'Data Semester Berhasil Diubah !');
+        return redirect()->back()->with('success', 'Data Semester Berhasil Diubah !');
     }
 
 
-    public function importnilaiMahasiswa(Request $request){
+    public function importnilaiMahasiswa(){
         Excel::import(new NilaiImport, request()->file('file'));
-    return redirect('/dashboard/admin/daftar/nilai')->with('success', 'Nilai Berhasil Ditambahkan !');
+        return redirect('/dashboard/admin/daftar/nilai')->with('success', 'Nilai Berhasil Ditambahkan !');
     }
 
-    public function deleted_nilai(Request $request, $id){
+    public function deleted_nilai($id){
         $nilai = Nilai::findOrFail($id);
         $nilai->delete();
-    return redirect('/dashboard/admin/daftar/nilai')->with('success', 'Nilai Berhasil Dihapus !');
+        return redirect('/dashboard/admin/daftar/nilai')->with('success', 'Nilai Berhasil Dihapus !');
     }
 
     public function pengaturan(){
