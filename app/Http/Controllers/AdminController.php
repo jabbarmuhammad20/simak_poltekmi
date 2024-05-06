@@ -21,20 +21,37 @@ class AdminController extends Controller
 {
 
     public function daftarMahasiswa()
+    // Daftar Mahasiswa Aktif
     {
         $data = [
             'title' => 'Daftar Mahasiswa',
-            'mahasiswa' => Mahasiswa::with('user','programstudi')->get(),
+            'mahasiswa' => Mahasiswa::with('user','programstudi')
+            ->where('aktif','1')
+            ->get(),
         ];
 
-        return view('mahasiswa.daftarMhs', compact('data'));
+        return view('mahasiswa.daftarMhs', compact('data') );
+    }
+
+    public function daftarMahasiswa_nonaktif()
+    // Daftar Mahasiswa nonAktif
+    {
+        $data = [
+            'title' => 'Daftar Mahasiswa',
+            'mahasiswa' => Mahasiswa::with('user','programstudi')
+            ->where('aktif','0')
+            ->get(),
+        ];
+
+        return view('mahasiswa.daftarMhs', compact('data') );
     }
 
     public function verMatkul(){
         $data = [
-            'title' => 'Daftar Matakuliah yang Diampu',
-            'matkul' => Matakuliah::with('user','tahunakademik','programstudi')
-            // ->where('dosen_id', Auth::user()->id)
+            'title' => 'Daftar Matakuliah Aktif',
+            'dosen' => Dosen::all(),
+            'matkul' => Matakuliah::with('user','tahunakademik','programstudi','dosen')
+            ->where('aktif','1')
             ->get(),
         ];
         $tahun_akademik = Tahun_Akademik::all();
@@ -43,14 +60,14 @@ class AdminController extends Controller
         return view('mahasiswa.verifikasiMatkul_adm', compact('data','tahun_akademik','prog'));    
     }
 
-    public function getNilaiByMatkul($id){
+    public function getNilaiByMatkul(Request $request, $id){
+        $setting = Setting::all()->first();
         $data = [
             'title' => 'Data Nilai Mahasiswa',
             'nilai' => Nilai::with('mahasiswa', 'matakuliah', 'user', 'programstudi','tahunakademik')
             ->where('matakuliah_id', $id)
-            // ''->where('tahunakademik_id','id')
+            ->where('tahunakademik_id',$setting->tahunakademik_id)
             ->get(),
-            'setting' => Setting::all()->first(),
         ];
         return view('mahasiswa/verifikasiNilai_adm', compact('data'));
     }
@@ -62,6 +79,7 @@ class AdminController extends Controller
         $nilai->update();
         return redirect()->back()->with('success', 'Nilai Berhasil diubah !');
     }
+
     public function updateMatkul(Request $request, $id){
         $matkul = Matakuliah::findOrFail($id);
         $matkul ->k_matkul=$request->input('k_matkul');
@@ -183,13 +201,19 @@ class AdminController extends Controller
         return view('dosen.tambahDosen', compact('data'));
     }
 
-    public function daftarMatkul(){
-        $data = [
-            'title' => 'Data Matkul',
-            'matkul' => Matakuliah::with('user','tahunakademik','programstudi')->get(),
-        ];
+    public function arsipMatkul(){
+        // daftar matakuliah non aktif
+            $data = [
+            'title' => 'Daftar Matakuliah Non Aktif',
+            'dosen' => Dosen::all(),
+            'matkul' => Matakuliah::with('user','tahunakademik','programstudi','dosen')
+            ->where('aktif','0')
+            ->get(),
+            ];
+            $tahun_akademik = Tahun_Akademik::all();
+            $prog = Programstudi::all();
 
-        return view('matakuliah.daftarMatkul', compact('data'));
+        return view('matakuliah.arsipMatkul', compact('data','prog','tahun_akademik'))->with('success', 'Matakuliah Berhasil Diubah !');
     }
 
     public function daftarDosen(){
@@ -225,8 +249,25 @@ class AdminController extends Controller
 
     public function pengaturan(){
         $data = [
-            'title' => 'Pengaturan',
+            'title' => 'Tahun Akademik',
+            'tahunakademik' => Tahun_Akademik::all(),
+            'setting' => Setting::with('tahunakademik')->get(), 
+
         ];
         return view('setting/tahunAkademik', compact('data'));
+    }
+
+    public function updateTahunakademik(Request $request, $id){
+        $data = [
+            'title' => 'Tahun Akademik',
+            'tahunakademik' => Tahun_Akademik::all(),
+            'setting' => Setting::with('tahunakademik')->get(),  
+        ];  
+
+        $tahun_akademik = Setting::first();
+        $tahun_akademik ->tahunakademik_id=$request->input('tahunakademik_id');
+        $tahun_akademik->update();
+
+        return redirect()->back()->with('success', 'Data Semester Berhasil Diubah !');
     }
 }

@@ -17,14 +17,18 @@ class Dosen extends Model
         'prog_studi',
     ];
 
-    public function Matakuliah()
+    public function matakuliah()
     {
-     return $this->hasMany(Matakuliah::class);
+     return $this->belongsTo(Matakuliah::class,'id','dosen_id');
     }
 
     public function User()
     {
      return $this->belongsTo(User::class);
+    }
+    public function mahasiswa()
+    {
+     return $this->belongsTo(Mahasiswa::class,'id','dosen_id');
     }
 
     public function getNonDosenIds()

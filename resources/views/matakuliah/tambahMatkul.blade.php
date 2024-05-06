@@ -84,7 +84,7 @@
                           @else
                           <option selected>Pilih Dosen Pengampu</option>
                           @foreach ($data['dosen'] as $d )
-                          <option value="{{$d->user_id}}" >{{$d->nidn}}-{{$d->nama}}</option>
+                          <option value="{{$d->id}}"> {{$d->nidn}}-{{$d->nama}}</option>
                           @endforeach
                           @endif
                         </select>

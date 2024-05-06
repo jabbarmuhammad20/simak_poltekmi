@@ -18,7 +18,8 @@ return new class extends Migration
             $table->integer('semester');
             $table->integer('tahun_masuk');
             $table->string('programstudi_id');
-            $table->string('k_dosenwali');
+            $table->integer('kelas_id');
+            $table->string('dosen_id');
             $table->string('aktif');
             $table->string('ket');
             $table->timestamps();

@@ -14,7 +14,7 @@
 
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Daftar Matakuliah</h5>
+                <h5 class="card-title">Daftar Matakuliah Non Aktif</h5>
 
                 <table class="table table-striped">
                     <thead>
@@ -69,7 +69,7 @@
                                                             <option selected value="{{$m->programstudi_id}}">*{{$m->programstudi[0]->programstudi}}
                                                             </option>
                                                             @foreach ($prog as $p)
-                                                                <option value="{{ $p->id}}">
+                                                                <option value="{{ $p->id }}">
                                                                 {{ $p->programstudi }}
                                                                 </option>
                                                             @endforeach

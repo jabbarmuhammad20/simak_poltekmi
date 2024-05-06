@@ -43,7 +43,14 @@
         <ul id="forms-mahasiswa" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
           <li>
             <a href="{{ route('admin.daftar.mahasiswa')}}">
-              <i class="bi bi-circle"></i><span>Daftar Mahasiswa</span>
+              <i class="bi bi-circle"></i><span>Daftar Mahasiswa Aktif</span>
+            </a>
+          </li>
+        </ul>
+        <ul id="forms-mahasiswa" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{{ route('admin.daftar.mahasiswa_nonaktif')}}">
+              <i class="bi bi-circle"></i><span>Daftar Mahasiswa Non Aktif</span>
             </a>
           </li>
         </ul>
@@ -71,14 +78,27 @@
         <ul id="forms-matakuliah" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
           <li>
             <a href="{{ route('admin.daftar.matkul')}}">
-              <i class="bi bi-circle"></i><span>Daftar Matakuliah</span>
+              <i class="bi bi-circle"></i><span>Daftar Matakuliah Aktif</span>
             </a>
           </li>
         </ul>
         <ul id="forms-matakuliah" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
           <li>
-            <a href="{{route('admin.daftar.matkul')}}">
-              <i class="bi bi-circle"></i><span>Ver Daftar Matakuliah</span>
+            <a href="{{route('admin.arsip.matkul')}}">
+              <i class="bi bi-circle"></i><span>Arsip Daftar Matakuliah</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link " data-bs-target="#forms-matakuliah" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-gear"></i><span>Pengaturan</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-matakuliah" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{{ route('admin.pengaturan.tahunakademik')}}" >
+              <i class="bi bi-circle"></i><span>Tahun Akademik</span>
             </a>
           </li>
         </ul>
@@ -102,10 +122,16 @@
             </a>
           </li>
         </ul>
-      
-      
     </li>
+
+    {{-- Mahasiswa --}}
       @else
+      <li class="nav-item">
+        <a class="nav-link" href="{{route('mahasiswa.biodata')}}">
+          <i class="bi bi-journal-text"></i>
+          <span>Biodata</span>
+        </a>
+      </li>
       <li class="nav-item">
         <a class="nav-link" href="{{ route('mahasiswa.nilai') }}">
           <i class="bi bi-journal-text"></i>
@@ -118,12 +144,13 @@
           <span>Mata Kuliah</span>
         </a>
       </li>
-      <li class="nav-item">
+      {{-- <li class="nav-item">
         <a class="nav-link" href="{{ route('mahasiswa.krs') }}">
           <i class="bi bi-journal-text"></i>
           <span>KRS</span>
         </a>
-      </li>
+      </li> --}}
+
       @endif
     </ul>
 

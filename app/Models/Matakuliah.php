@@ -48,4 +48,8 @@ class Matakuliah extends Model
     {
         return $this->hasMany(Programstudi::class,'id','programstudi_id');
     }
+       public function dosen()
+    {
+        return $this->hasMany(Dosen::class,'id','dosen_id');
+    }
 }

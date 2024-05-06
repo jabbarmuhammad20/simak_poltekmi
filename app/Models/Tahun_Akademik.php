@@ -22,5 +22,9 @@ class Tahun_Akademik extends Model
     {
         return $this->belongsTo(Nilai::class,'tahunakademik_id','id');
     }
+    public function setting()
+    {
+        return $this->hasMany(Setting::class,'tahunakademik_id','id');
+    }
     
 }

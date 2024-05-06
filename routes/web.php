@@ -49,6 +49,8 @@ Route::middleware(['auth'])->group(function () {
 				Route::controller(MahasiswaController::class)->group(function () { 
 					Route::match(['GET'], 'nilai','nilai')->name('mahasiswa.nilai');
 					Route::match(['GET'], 'matakuliah','daftarMatkul')->name('mahasiswa.matakuliah');
+					Route::match(['GET'], 'cetak','printKrs')->name('mahasiswa.printkrs');
+					Route::match(['GET'], 'biodata','Biodata')->name('mahasiswa.biodata');
 					Route::match(['GET'], 'krs','krs')->name('mahasiswa.krs');
 					Route::match(['GET', 'POST'], 'inputkrs','inputkrs')->name('mahasiswa.inputkrs');
 				});
@@ -61,8 +63,9 @@ Route::middleware(['auth'])->group(function () {
 					Route::match(['GET', 'POST'], 'tambah/dosen', 'createDosen')->name('admin.store.dosen');
 					Route::match(['GET', 'POST'], 'tambah/mahasiswa', 'createMahasiswa')->name('admin.store.mahasiswa');
 					Route::match(['GET', 'POST'], 'tambah/matkul', 'createMatkul')->name('admin.store.matkul');
-					Route::match(['GET'], 'daftar/matkul', 'daftarMatkul')->name('admin.daftar.matkul');
+					Route::match(['GET'], 'Arsip/matkul', 'arsipMatkul')->name('admin.arsip.matkul');
 					Route::match(['GET'], 'daftar/mahasiswa', 'daftarMahasiswa')->name('admin.daftar.mahasiswa');
+					Route::match(['GET'], 'daftar/mahasiswa_nonaktif', 'daftarMahasiswa_nonaktif')->name('admin.daftar.mahasiswa_nonaktif');
 					Route::match(['GET'], 'daftar/dosen', 'daftarDosen')->name('admin.daftar.dosen');
 					Route::match(['GET'], 'daftar/nilai', 'daftarnilaiMahasiswa')->name('admin.daftar.nilai');
 					Route::match(['GET'], 'verMatkul', 'verMatkul')->name('admin.daftar.matkul');
@@ -74,6 +77,8 @@ Route::middleware(['auth'])->group(function () {
 					Route::match(['GET'], 'daftar/matkul/{id}/nilai', 'getNilaiByMatkul')->name('admin.matkul.nilai');
 					Route::match(['GET'], 'update_semesterExport', 'update_semesterExport')->name('admin.update.export');
 					Route::match(['PUT'], 'update_semesterImport', 'update_semesterImport')->name('admin.update.Import');
+					Route::match(['GET'], 'pengaturan', 'pengaturan')->name('admin.pengaturan.tahunakademik');
+					Route::match(['GET'], 'pengaturan{id}', 'updateTahunakademik')->name('admin.pengaturan.updatetahunakademik');
 				});
 			});
 		});

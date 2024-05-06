@@ -15,7 +15,7 @@
 
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">{{ $data['title'] }} | T.A {{$setting->tahun_akademik}} | @if ($setting->ganjil_genap == 1) Ganjil @else Genap @endif</h5>
+            <h5 class="card-title">{{ $data['title'] }} | T.A {{$setting->tahun_akademik}} | @if ($setting->ganjil_genap == 1) Ganjil @else Genap @endif</h5> <a href="{{route('mahasiswa.printkrs')}}" target="blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
 
             <!-- Table with stripped rows -->
             <table class="table table-striped">

@@ -42,7 +42,7 @@ class MahasiswaController extends Controller
     public function krs(Request $request) {
         if ($request->ajax()) {
             return $this->response(true, Matakuliah::with('Nilai')->get());
-        }
+        } 
      
         $data = [
             'title' => 'Kartu Rencana Studi',
@@ -75,5 +75,30 @@ class MahasiswaController extends Controller
     
             return $this->response(true, 'Berhasil menambah KRS.');
         }
+    }
+    public function printKrs(){
+        //sc sama dengan daftar matkul
+        $data = [
+            'title' => 'KARTU RENCANA STUDI',
+            'matkul' => Matakuliah::with('programstudi','mahasiswa','tahunakademik')
+            ->where('programstudi_id',Auth::user()->Mahasiswa[0]->programstudi_id)
+            // ->where('semester',Auth::user()->Mahasiswa[0]->semester)
+            ->get(),
+        ];
+        $setting = Setting::all()->first();
+        return view('mhs.printKrs_mhs', compact('data','setting'));
+
+    }
+
+    public function Biodata(){
+        $data = [
+            'title' => 'Biodata',
+            'biodata'=> Mahasiswa::with('user','dosen','programstudi')
+            ->where('user_id', Auth::user()->id)
+            ->get(),
+        ];
+        
+        
+        return view('mhs.biodata_mhs', compact('data'));
     }
 }

@@ -27,4 +27,9 @@ class Programstudi extends Model
     {
         return $this->belongsTo(Nilai::class,'programstudi_id','id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'programstudi_id','id');
+    }
 }

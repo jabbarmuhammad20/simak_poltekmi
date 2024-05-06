@@ -46,4 +46,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Mahasiswa::class);
     }
+    public function programstudi()
+    {
+        return $this->hasMany(Programstudi::class);
+    }
 }
