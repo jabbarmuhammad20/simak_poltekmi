@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Dosen;
 use App\Models\Mahasiswa;
 use App\Models\User;
+use App\Models\Kelas;
 use App\Models\Tahun_Akademik;
 use App\Models\Matakuliah;
 use App\Models\Programstudi;
@@ -139,6 +140,7 @@ class AdminController extends Controller
             'dosen' => Dosen::all(), 
             'tahunAkademik' => Tahun_Akademik::all(),
             'program' => Programstudi::all(),
+            'kelas' => kelas::all(),
         ];
         return view('mahasiswa.tambahMhs', compact('data'));
     }

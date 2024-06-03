@@ -14,6 +14,7 @@ class Mahasiswa extends Model
         'npm',
         'tahun_masuk',
         'semester',
+        'kelas_id',
         'programstudi_id',
         'kelas_id',
         'dosen_id',
