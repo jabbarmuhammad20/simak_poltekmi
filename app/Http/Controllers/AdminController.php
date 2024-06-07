@@ -265,11 +265,30 @@ class AdminController extends Controller
             'tahunakademik' => Tahun_Akademik::all(),
             'setting' => Setting::with('tahunakademik')->get(),  
         ];  
-
         $tahun_akademik = Setting::first();
-        $tahun_akademik ->tahunakademik_id=$request->input('tahunakademik_id');
+        $tahun_akademik->tahunakademik_id=$request->input('tahunakademik_id');
         $tahun_akademik->update();
 
         return redirect()->back()->with('success', 'Data Semester Berhasil Diubah !');
     }
+
+    public function pengaturankelas( Request $request){
+        if ($request->isMethod('POST')) {
+            Kelas::create([
+                'kode' => $request->kode,
+                'namakelas' => $request->namakelas,
+                'ruangkelas' => $request->ruangkelas,
+        
+            ]);
+
+            return redirect()->back()->with('success', 'Kelas Berhasil Ditambah !');
+        }
+
+        $data = [
+            'title' => 'Tambah Kelas',
+            'kelas' => Kelas::all(),
+        ];
+        return view('setting/tambahKelas', compact('data'));
+    }
+
 }

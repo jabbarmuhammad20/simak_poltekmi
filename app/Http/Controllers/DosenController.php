@@ -43,7 +43,7 @@ class DosenController extends Controller
     public function daftarMatkul(){
         $data = [
             'title' => 'Daftar Matakuliah yang Diampu',
-            'matkul' => Matakuliah::with('user','tahunakademik','programstudi')->where('dosen_id', Auth::user()->id)->get(),
+            'matkul' => Matakuliah::with('user','tahunakademik','programstudi')->where('dosen_id', Auth::user()->dosen[0]->id)->get(),
         ];
         $tahun_akademik = Tahun_Akademik::all();
         $prog = Programstudi::all();
@@ -79,7 +79,7 @@ class DosenController extends Controller
     public function input_nilai(Request $request, $id){
         $nilai = Nilai::findOrFail($id);
         $nilai ->nilai=$request->input('nilai');
-        $nilai->update();
+        $nilai ->update();
         return redirect()->back()->with('success', 'Nilai Berhasil ditambah !');
     }
 }

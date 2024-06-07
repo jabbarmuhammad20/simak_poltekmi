@@ -77,8 +77,10 @@ Route::middleware(['auth'])->group(function () {
 					Route::match(['GET'], 'daftar/matkul/{id}/nilai', 'getNilaiByMatkul')->name('admin.matkul.nilai');
 					Route::match(['GET'], 'update_semesterExport', 'update_semesterExport')->name('admin.update.export');
 					Route::match(['PUT'], 'update_semesterImport', 'update_semesterImport')->name('admin.update.Import');
+					Route::match(['GET','POST'], 'kelas', 'pengaturankelas')->name('admin.pengaturankelas');
 					Route::match(['GET'], 'pengaturan', 'pengaturan')->name('admin.pengaturan.tahunakademik');
 					Route::match(['GET'], 'pengaturan{id}', 'updateTahunakademik')->name('admin.pengaturan.updatetahunakademik');
+					
 				});
 			});
 		});

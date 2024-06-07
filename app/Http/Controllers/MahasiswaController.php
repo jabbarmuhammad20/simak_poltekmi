@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Matakuliah;
 use App\Models\Mahasiswa;
 use App\Models\Nilai;
+use App\Models\Kelas;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 
@@ -93,12 +94,35 @@ class MahasiswaController extends Controller
     public function Biodata(){
         $data = [
             'title' => 'Biodata',
-            'biodata'=> Mahasiswa::with('user','dosen','programstudi')
+            'biodata'=> Mahasiswa::with('user','dosen','programstudi','kelas')
             ->where('user_id', Auth::user()->id)
             ->get(),
         ];
-        
-        
         return view('mhs.biodata_mhs', compact('data'));
+    }
+
+    public function update_Biodata(Request $request, $id){
+        if ($request->isMethod('PUT')) {
+            // 'mahasiswa' = Mahasiswa::findOrFail($id);
+            Matakuliah::update([
+                'nik_mhs' => $request->nik_mhs,
+                'tempat_lahir' => $request->tempat_lahir,
+                'tgl_lahir' => $request->tgl_lahir,
+                'alamat' => $request->alamat,
+                'desa' => $request->desa,
+                'kec' => $request->kec,
+                'kab' => $request->kab,
+                'prov' => $request->prov,
+                'nama_bapak' => $request->nama_bapak,
+                'nama_ibu' => $request->nama_ibu 
+            ]);
+            return redirect('mhs/edit_biodataMhs')->with('success', 'Matakuliah Berhasil Ditambahkan !');
+        }
+        
+        $data = [
+            'title' => 'Edit Biodata'
+        ];
+        
+        return view('mhs/edit_biodataMhs', compact('data'));
     }
 }

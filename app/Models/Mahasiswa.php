@@ -26,16 +26,24 @@ class Mahasiswa extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
     public function matakuliah()
     {
         return $this->belongsTo(Matakuliah::class,'semester','id');
     }
+
     public function programstudi()
     {
         return $this->belongsTo(Programstudi::class,'programstudi_id','id');
     }
+
     public function dosen()
     {
-        return $this->belongsTo(Dosen::class,'id','dosen_id');
+        return $this->belongsTo(Dosen::class,'dosen_id','id');
+    }
+
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class,'kelas_id','id');
     }
 }

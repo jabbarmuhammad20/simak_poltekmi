@@ -40,21 +40,6 @@
                       </select>
                     </div>
                   </div>
-                  {{-- <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">Ganjil/Genap</label>
-                    <div class="col-sm-10">
-                      <select class="form-select" aria-label="Default select example" name="aktif">
-                          @foreach ( $data['tahunakademik'] as $t )
-
-                          @if ($data['setting']->ganjil_genap == 1)
-                          <option selected disabled value="{{$data['setting']->ganjil_genap}}">{{$data['setting']->ganjil_genap}}</option>
-                        @else
-                        <option value="{{$t->}}">{{$t->ganjil_genap}}</option>
-                        @endif
-                        @endforeach
-                      </select>
-                    </div>
-                  </div> --}}
                 <div class="row mb-3">
                   
                   <div class="col-sm-10">

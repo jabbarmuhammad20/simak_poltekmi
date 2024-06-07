@@ -65,7 +65,7 @@
         <ul id="forms-mahasiswa" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
           <li>
             <a href="{{ route('admin.daftar.nilai')}}">
-              <i class="bi bi-circle"></i><span>Daftar Kelas</span>
+              <i class="bi bi-circle"></i><span>Daftar Kelas (SOON)</span>
             </a>
           </li>
         </ul>
@@ -102,6 +102,13 @@
         <a class="nav-link " data-bs-target="#forms-matakuliah" data-bs-toggle="collapse" href="#">
           <i class="bi bi-gear"></i><span>Pengaturan</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
+        <ul id="forms-matakuliah" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{{route('admin.pengaturankelas')}}">
+              <i class="bi bi-circle"></i><span>Kelas</span>
+            </a>
+          </li>
+        </ul>
         <ul id="forms-matakuliah" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
           <li>
             <a href="{{ route('admin.pengaturan.tahunakademik')}}" >

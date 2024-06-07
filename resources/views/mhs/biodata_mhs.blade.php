@@ -19,7 +19,9 @@
 
             <div class="card">
                 <div class="card-body">
-                    <div class="card-title">Mahasiswa @if ($data['biodata'][0]->aktif == 1)
+                    <div class="card-title">Mahasiswa
+                      
+                      @if ($data['biodata'][0]->aktif == 1)
                       <span class="badge bg-primary"> <font color="white"> Aktif</font></span>
                       @else
                       <span class="badge bg-danger"> <font color="white"> Tidak Aktif</font></span>
@@ -49,13 +51,18 @@
                             <td>: {{ $data['biodata'][0]->programstudi->programstudi }}</td>
                           </tr>
                           <tr>
+                            <td>Kelas</td>
+                            <td>: {{ $data['biodata'][0]->kelas->namakelas }}</td>
+                          </tr>
+                          <tr>
                             <td>Dosen Wali</td>
                             <td>: {{ $data['biodata'][0]->dosen->nama }}</td>
                           </tr>
                         </tbody>
                     </table>
                     <!-- End Table with stripped rows -->
-
+                    <button type="button" class="btn btn-warning btn-sm" >Edit Biodata <i class="bi bi-pencil"></i>
+                </button>
                 </div>
             </div>
 

@@ -16,5 +16,10 @@ class Kelas extends Model
         'hari',
         'jam'
     ];
+
+    public function mahasiswa()
+    {
+        return $this->hasMany(Mahasiswa::class, 'kelas_id', 'id');
+    }
     
 }
