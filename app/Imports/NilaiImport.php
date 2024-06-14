@@ -15,6 +15,7 @@ class NilaiImport implements ToCollection,WithHeadingRow
             {
                 Nilai::create([
                     'tahunakademik_id' => $row['tahunakademik_id'],
+                    'kelas_id' => $row['kelas_id'],
                     'matakuliah_id' => $row['matakuliah_id'],
                     'mahasiswa_npm' => $row['npm'],
                     'k_matakuliah' => $row['k_matakuliah'],

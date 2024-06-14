@@ -21,5 +21,10 @@ class Kelas extends Model
     {
         return $this->hasMany(Mahasiswa::class, 'kelas_id', 'id');
     }
+
+    public function matakuliah()
+    {
+        return $this->hasMany(Matakuliah::class, 'kelas_id', 'id');
+    }
     
 }

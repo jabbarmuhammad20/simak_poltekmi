@@ -14,7 +14,7 @@
     </nav>
     --}}
   </div>
-
+  @if(Auth::user()->type === 'admin')
   <section class="section dashboard">
     <div class="row">
 
@@ -161,5 +161,10 @@
       </div><!-- End Left side columns -->
     </div>
   </section>
+  @elseif (Auth::user()->type === 'dosen')
+Selamat Datang
+@else
+<meta http-equiv="refresh" content="0;url={{route('mahasiswa.biodata')}}">
+@endif
 
 @endsection

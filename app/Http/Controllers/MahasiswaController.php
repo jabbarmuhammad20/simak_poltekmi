@@ -23,7 +23,7 @@ class MahasiswaController extends Controller
     public function nilai()
     {
         $data = [
-            'title' => 'Data Nilai',
+            'title' => 'Transkip Nilai',
             'matkul' => Nilai::with('matakuliah', 'mahasiswa')
                 ->where('mahasiswa_npm', Auth::user()->npm)
                 ->get(),
@@ -83,7 +83,7 @@ class MahasiswaController extends Controller
             'title' => 'Daftar Matakuliah Aktif',
             'matkul' => Matakuliah::with('programstudi', 'mahasiswa', 'tahunakademik')
                 ->where('programstudi_id', Auth::user()->Mahasiswa[0]->programstudi_id)
-                // ->where('semester',Auth::user()->Mahasiswa[0]->semester)
+                ->where('semester',Auth::user()->Mahasiswa[0]->semester)
                 ->get(),
         ];
         $setting = Setting::all()->first();
@@ -136,7 +136,7 @@ class MahasiswaController extends Controller
             'title' => 'KARTU RENCANA STUDI',
             'matkul' => Matakuliah::with('programstudi', 'mahasiswa', 'tahunakademik')
                 ->where('programstudi_id', Auth::user()->Mahasiswa[0]->programstudi_id)
-                // ->where('semester',Auth::user()->Mahasiswa[0]->semester)
+                ->where('semester',Auth::user()->Mahasiswa[0]->semester)
                 ->get(),
         ];
         $setting = Setting::all()->first();
@@ -154,29 +154,20 @@ class MahasiswaController extends Controller
         return view('mhs.biodata_mhs', compact('data'));
     }
 
-    public function update_Biodata(Request $request, $id)
+    public function update_biodata(Request $request)
     {
-        if ($request->isMethod('PUT')) {
-            // 'mahasiswa' = Mahasiswa::findOrFail($id);
-            Matakuliah::update([
-                'nik_mhs' => $request->nik_mhs,
-                'tempat_lahir' => $request->tempat_lahir,
-                'tgl_lahir' => $request->tgl_lahir,
-                'alamat' => $request->alamat,
-                'desa' => $request->desa,
-                'kec' => $request->kec,
-                'kab' => $request->kab,
-                'prov' => $request->prov,
-                'nama_bapak' => $request->nama_bapak,
-                'nama_ibu' => $request->nama_ibu
+        Mahasiswa::where('user_id', Auth::user()->id)->update([
+            'nik_mhs' => $request->input('nik_mhs'),
+            'tempat_lahir' => $request->input('tempat_lahir'),
+            'tgl_lahir' => $request->input('tgl_lahir'),
+            'alamat' => $request->input('alamat'),
+            'desa' => $request->input('desa'),
+            'kec' => $request->input('kec'),
+            'kab' => $request->input('kab'),
+            'prov' => $request->input('prov'),
+            'nama_bapak' => $request->input('nama_bapak'),
+            'nama_bapak' => $request->input('nama_ibu')
             ]);
-            return redirect('mhs/edit_biodataMhs')->with('success', 'Matakuliah Berhasil Ditambahkan !');
-        }
-
-        $data = [
-            'title' => 'Edit Biodata'
-        ];
-
-        return view('mhs/edit_biodataMhs', compact('data'));
+        return redirect()->back()->with('success', 'Data Berhasil diubah !');
     }
 }

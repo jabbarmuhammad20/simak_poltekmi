@@ -126,8 +126,9 @@ class AdminController extends Controller
                 'npm' => $user->npm,
                 'semester' => $request->semester,
                 'tahun_masuk' => $request->tahun_masuk,
+                'kelas_id' => $request->kelas_id,
                 'programstudi_id' => $request->programstudi_id,
-                'k_dosenwali' => $request->k_dosenwali,
+                'dosen_id' => $request->dosen_id,
                 'aktif' => $request->aktif,
                 'ket' => $request->ket,
             ]);
@@ -153,6 +154,7 @@ class AdminController extends Controller
                 'k_matkul' => $request->k_matkul,
                 'nama_matakuliah' => $request->nama_matakuliah,
                 'programstudi_id' => $request->programstudi_id,
+                'kelas_id' => $request->kelas_id,
                 'sks' => $request->sks,
                 'semester' => $request->semester,
                 'ket' => $request->ket,
@@ -167,6 +169,7 @@ class AdminController extends Controller
             'dosen' => Dosen::all(),
             'tahunAkademik' => Tahun_Akademik::all(),
             'programstudi' => Programstudi::all(),
+            'kelas' => kelas::all(),
         ];
 
         return view('matakuliah.tambahMatkul', compact('data'));

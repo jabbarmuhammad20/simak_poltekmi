@@ -13,6 +13,7 @@ class Nilai extends Model
         'tahunakademik_id',
         'matakuliah_id',
         'mahasiswa_npm',
+        'kelas_id',
         'k_matakuliah',
         'krs',
         'nidn',

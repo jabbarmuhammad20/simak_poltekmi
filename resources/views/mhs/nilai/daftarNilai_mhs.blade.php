@@ -24,15 +24,15 @@
                                     <th scope="col">Kode Matakuliah</th>
                                     <th scope="col">Matakuliah</th>
                                     <th scope="col">SKS</th>
-                                    <th scope="col">Nilai</th>
-                                    <th scope="col">Predikat</th>
+                                    <th scope="col">Angka</th>
+                                    <th scope="col">Huruf</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($data['matkul'] as $n)
                                     @if ($n->Matakuliah->semester == $semester)
                                         <tr>
-                                            <th scope="row">{{ $loop->iteration }}</th>
+                                            <td scope="row">{{ $loop->iteration }}</td>
                                             <td>{{ $n->Matakuliah->k_matkul }}</td>
                                             <td>{{ $n->Matakuliah->nama_matakuliah }}</td>
                                             <td>{{ $n->Matakuliah->sks }}</td>
@@ -61,7 +61,7 @@
                                     <td>{{ $data['semesterData'][$semester]['totalSks'] }}</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="5" class="text-end">Indeks Prestasi</td>
+                                    <td colspan="5" class="text-end">Indeks Prestasi Semester</td>
                                     <td>{{ number_format($data['semesterData'][$semester]['ip'], 2) }}</td>
                                 </tr>
                             </tfoot>

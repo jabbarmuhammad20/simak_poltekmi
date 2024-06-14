@@ -38,7 +38,7 @@
                 </div>
 
                 <div class="row mb-3">
-                  <label for="inputNumber" class="col-sm-2 col-form-label">NPM</label>
+                  <label for="inputNumber" class="col-sm-2 col-form-label">NIM</label>
                   <div class="col-sm-10">
                     <input type="number" name="npm" class="form-control">
                   </div>
@@ -78,10 +78,10 @@
                   <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">Dosen Wali</label>
                     <div class="col-sm-10">
-                      <select class="form-select" aria-label="Default select example" name="k_dosenwali">
+                      <select class="form-select" aria-label="Default select example" name="dosen_id">
                         <option selected>Open this select menu</option>
                         @foreach ($data['dosen'] as $dsn )
-                        <option value="{{$dsn->nidn}}">{{$dsn->nidn}} - {{$dsn->nama}}</option>
+                        <option value="{{ $dsn->id }}">{{$dsn->nidn}} - {{$dsn->nama}}</option>
                         @endforeach
                       </select>
                     </div>
@@ -89,7 +89,7 @@
                   <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">Ruang Kelas</label>
                     <div class="col-sm-10">
-                      <select class="form-select" aria-label="Default select example" name="k_dosenwali">
+                      <select class="form-select" aria-label="Default select example" name="kelas_id">
                         <option selected>Ruang Kelas</option>
                         @foreach ($data['kelas'] as $k )
                         <option value="{{$k->id}}">{{$k->ruangkelas}} - {{$k->namakelas}}</option>

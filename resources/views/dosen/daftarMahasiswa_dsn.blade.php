@@ -21,7 +21,7 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">NPM</th>
+                            <th scope="col">NIM</th>
                             <th scope="col">Nama</th>
                             <th scope="col">Progam</th>
                             <th scope="col">Nilai</th>

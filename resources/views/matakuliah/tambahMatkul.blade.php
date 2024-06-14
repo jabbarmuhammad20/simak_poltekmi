@@ -90,7 +90,17 @@
                         </select>
                     </div>
                 </div>
-                
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label">Kelas</label>
+              <div class="col-sm-10">
+                  <select class="form-select" aria-label="Default select example" name="kelas_id">
+                    <option selected>Pilih Kelas</option>
+                    @foreach ($data['kelas'] as $d )
+                    <option value="{{$d->id}}"> {{$d->ruangkelas}} - {{$d->namakelas}}</option>
+                    @endforeach
+                  </select>
+              </div>
+          </div>
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">Status</label>
                     <div class="col-sm-10">

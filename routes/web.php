@@ -51,6 +51,7 @@ Route::middleware(['auth'])->group(function () {
 					Route::match(['GET'], 'matakuliah','daftarMatkul')->name('mahasiswa.matakuliah');
 					Route::match(['GET'], 'cetak','printKrs')->name('mahasiswa.printkrs');
 					Route::match(['GET'], 'biodata','Biodata')->name('mahasiswa.biodata');
+					Route::match(['PUT'], 'update_biodata','update_biodata')->name('mahasiswa.update_biodata');
 					Route::match(['GET'], 'krs','krs')->name('mahasiswa.krs');
 					Route::match(['GET', 'POST'], 'inputkrs','inputkrs')->name('mahasiswa.inputkrs');
 				});
